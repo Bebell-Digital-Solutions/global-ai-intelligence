@@ -53,6 +53,8 @@ font-family:var(--font-primary);
     margin-bottom: 25px;
 }
 
+
+
 .live-badge {
     color: var(--success);
     font-size: 12px;
@@ -64,7 +66,27 @@ font-family:var(--font-primary);
     padding: 8px 20px;
     border-radius: 20px;
     border: 1px solid var(--border);
+    cursor: pointer;
+    
+    /* Animation Properties */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 140px; /* Initial width */
+    white-space: nowrap;
+    overflow: hidden;
 }
+
+.live-badge:hover {
+    max-width: 250px; /* Expands on hover */
+    padding: 8px 25px;
+    background: var(--bg-hover);
+    border-color: var(--success);
+    letter-spacing: 1.5px; /* Techy expansion feel */
+    box-shadow: 0 0 15px rgba(81, 207, 102, 0.2); /* Subtle green glow */
+    transform: scale(1.05);
+}
+
+
+  
 
 .live-badge i { animation: pulse 2s infinite; }
 
@@ -86,6 +108,7 @@ border-right: 1px solid var(--border);
 padding: 20px;
 padding-top: 2rem;
 overflow: auto;
+position: relative; /* Essential for absolute positioning of children */  
 }
 
 .sidebar-brand {
@@ -169,7 +192,33 @@ text-align: left;
 background:var(--primary);
 }
 
+.sidebar-footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+}
 
+.version-tag {
+    font-family: var(--font-tech);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    transition: var(--transition);
+}
+
+.version-tag:hover {
+    color: var(--primary);
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 80, 17, 0.4);
+}
+
+
+
+  
 
 
 .main {
@@ -408,15 +457,12 @@ canvas { margin-top:10px; }
 <div class="container">
 
 <div class="sidebar">
+  
     <div class="sidebar-brand">
-
-
 <img src="https://bucket.mlcdn.com/a/3336/3336910/images/b70a2366257c3d360371141467614834b2c66fa5.png" alt="Global AI Logo" class="brand-logo">      
         <h2>Global AI<br>Intelligence</h2>
     </div>
-    
-    
-    
+      
     <button onclick="go('overview')" class="active-btn"><i class="fa-solid fa-chart-line"></i> Overview</button>
     <button onclick="go('frontier')"><i class="fa-solid fa-flask"></i> Frontier Labs</button>
     <button onclick="go('infrastructure')"><i class="fa-solid fa-server"></i> Infrastructure</button>
@@ -431,6 +477,13 @@ canvas { margin-top:10px; }
     <button onclick="loadExternal('https://bebell-digital-solutions.github.io/global-ai-intelligence/resources/glossary', this)"><i class="fa-solid fa-spell-check"></i> AI Glossary</button>
     <button onclick="loadExternal('https://bebell-digital-solutions.github.io/global-ai-intelligence/resources/rss-feed', this)"><i class="fa-solid fa-rss"></i> RSS Feed</button>
 
+
+<div class="sidebar-footer">
+    <div class="version-tag">
+        <i class="fa-solid fa-code-branch"></i> v2.0.26-BETA
+    </div>
+</div>
+  
 </div>
 
 
