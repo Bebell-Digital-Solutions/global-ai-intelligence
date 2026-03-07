@@ -11,11 +11,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-  <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/954757f0260b2060e6b3824794ee5114949064bf.png">
- 
-    
 
 <style>
 :root {
@@ -53,8 +50,6 @@ font-family:var(--font-primary);
     margin-bottom: 25px;
 }
 
-
-
 .live-badge {
     color: var(--success);
     font-size: 12px;
@@ -69,8 +64,8 @@ font-family:var(--font-primary);
     cursor: pointer;
     
     /* Animation Properties */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    max-width: 140px; /* Initial width */
+    transition: all 0.4s;
+    max-width: 100%; /* Initial width */
     white-space: nowrap;
     overflow: hidden;
 }
@@ -80,13 +75,10 @@ font-family:var(--font-primary);
     padding: 8px 25px;
     background: var(--bg-hover);
     border-color: var(--success);
-    letter-spacing: 1.5px; /* Techy expansion feel */
+    letter-spacing: 1.2px; /* Techy expansion feel */
     box-shadow: 0 0 15px rgba(81, 207, 102, 0.2); /* Subtle green glow */
     transform: scale(1.05);
 }
-
-
-  
 
 .live-badge i { animation: pulse 2s infinite; }
 
@@ -102,37 +94,26 @@ grid-template-columns: 280px 1fr;
 height: 100vh;
 }
 
-
-  
-
 .sidebar {
 background: var(--bg-darker);
 border-right: 1px solid var(--border);
 padding: 20px;
-padding-top: 2rem;
+padding-top: 3rem;
 overflow: auto;
 position: relative; /* Essential for absolute positioning of children */
 display: flex;
 flex-direction: column;  
 }
 
-
-
-
-  
-
 .sidebar-brand {
     text-align: center;
     margin-bottom: 38px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border);
-
 }
 
-
-
 .brand-logo {
-    width: 100px; /* Adjust size as needed */
+    width: 90px; /* Adjust size as needed */
     height: auto;
     filter: drop-shadow(0 0 5px rgba(255, 80, 17, 0.3)); /* Optional: adds a glow in your skin-color */
   cursor: pointer;
@@ -141,12 +122,9 @@ flex-direction: column;
 
 .brand-logo:hover {
     /* Uses drop-shadow instead of text-shadow for images */
-    filter: drop-shadow(0 0 15px var(--box-color)) brightness(1.2) blur(0.2px);
+    filter: drop-shadow(0 0 15px var(--primary)) brightness(1.2) blur(0.2px);
     transform: scale(1.1) translateY(-5px);
 }
-
-  
-  
 
 .sidebar-brand i {
     font-size: 60px;
@@ -156,18 +134,13 @@ flex-direction: column;
     cursor: pointer;
 }
 
-
-
 .sidebar-brand i:hover {
     color: var(--primary);
     text-shadow: 0 0 15px var(--bg-card);
     filter: blur(0.5px) brightness(1.2);
     transform: scale(1.1) translateY(-3px);    
     transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-
 }
-
-
 
 .sidebar-brand h2 {
     font-family: var(--font-tech);
@@ -226,11 +199,6 @@ background:var(--primary);
     text-shadow: 0 0 10px rgba(255, 80, 17, 0.4);
 }
 
-
-
-  
-
-
 .main {
 padding:25px;
 overflow:auto;
@@ -244,10 +212,6 @@ overflow:auto;
 
 .main section.active { display: block; }
 
-
-
-
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
@@ -260,17 +224,12 @@ gap:20px;
 margin-bottom: 20px;
 }
 
-
-
-
 .dashboard-4col {
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:20px;
 margin-bottom: 20px;
 }
-
-
 
 .card {
 background:var(--bg-card);
@@ -300,7 +259,10 @@ color: var(--primary);
 margin-bottom: 20px;
 }
 
-
+/* Apply primary color to all icons in headings */
+h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
+    color: var(--primary);
+}
 
 /* Enhanced spacing for dashboard lists */
 .tech-list {
@@ -327,9 +289,6 @@ margin-bottom: 20px;
 .tech-list li:last-child {
     margin-bottom: 0;
 }
-
-
-  
 
 .metric {
 font-size:36px;
@@ -412,6 +371,28 @@ canvas { margin-top:10px; }
 .sidebar { display:flex; overflow-x:auto; }
 .sidebar button { min-width:160px; margin-right:10px; }
 }
+
+
+
+/* Increased spacing specifically for the Geopolitics Export Control list */
+#geopolitics .card ul li {
+    line-height: 1.8;      /* Significant space between lines of the same bullet */
+    margin-bottom: 20px;   /* Significant space between separate bullets */
+    display: block;        /* Ensures margins apply correctly */
+}
+
+
+
+#geopolitics .card ul li strong {
+    display: block;        /* Puts the label on its own line for a "stacked" look */
+    margin-bottom: 4px;
+}
+
+
+
+
+
+
 
 /* --- Vertical Timeline --- */
 .eco-timeline-container {
@@ -518,7 +499,6 @@ canvas { margin-top:10px; }
     <button onclick="loadExternal('https://bebell-digital-solutions.github.io/global-ai-intelligence/resources/glossary', this)"><i class="fa-solid fa-spell-check"></i> AI Glossary</button>
     <button onclick="loadExternal('https://bebell-digital-solutions.github.io/global-ai-intelligence/resources/rss-feed', this)"><i class="fa-solid fa-rss"></i> RSS Feed</button>
 
-
 <div class="sidebar-footer">
     <div class="version-tag">
         <i class="fa-solid fa-code-branch"></i> v2.0.26-BETA
@@ -527,12 +507,6 @@ canvas { margin-top:10px; }
   
 </div>
 
-
-
-
-
-
-
 <div class="main">
     <div class="main-header">    
         <div class="live-badge">
@@ -540,12 +514,6 @@ canvas { margin-top:10px; }
         </div>
     </div>
     
-    
-    
-    
-    
-    
-
     <!-- OVERVIEW SECTION -->
     <section id="overview" class="active">
         <div class="dashboard-4col">
@@ -591,15 +559,11 @@ canvas { margin-top:10px; }
             </div>
         </div>
 
-
-      
-      
         <div class="dashboard">
             <div class="card">
                 <h3><i class="fa-solid fa-chart-column" style="color: var(--primary)"></i> Global Hyperscaler CapEx Growth (USD Billions)</h3>
                 <canvas id="investmentChart"></canvas>
             </div>
-
 
           
             <div class="card">
@@ -621,23 +585,12 @@ canvas { margin-top:10px; }
         </div>
     </section>
     
-    
-    
-    
-
-
-
-
-    
-
     <!-- FRONTIER LABS SECTION -->
     <section id="frontier">
         <div class="card" style="margin-bottom: 20px;">
             <h2 class="page-title"><i class="fa-solid fa-flask"></i> Frontier Labs & Consolidation</h2>
             <p style="color:var(--text-muted); line-height: 1.6;">The financial architecture of the AI sector in 2026 is defined by "mega-rounds" driving deep vertical integration between model development, hardware supply, and cloud infrastructure. A clear "winner-takes-most" market dynamic has emerged.</p>
         </div>
-        
-        
         
         <div class="dashboard">
             <div class="card" style="grid-column: 1 / -1; display: flex; flex-direction: column;">
@@ -648,13 +601,10 @@ canvas { margin-top:10px; }
             </div>
         </div>        
         
-        
-        
-
         <div class="dashboard">
             <!-- OpenAI Card -->
             <div class="card" style="border-top: 4px solid var(--primary);">
-                <h3><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" width="20" style="vertical-align: text-bottom; filter: invert(1); margin-right: 5px;"> OpenAI: The Trillion-Dollar Trajectory</h3>
+                <h3><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" width="20" style="vertical-align: text-bottom; filter: invert(41%) sepia(86%) saturate(3061%) hue-rotate(352deg) brightness(101%) contrast(106%); margin-right: 5px;"> OpenAI: The Trillion-Dollar Trajectory</h3>
                 <div class="metric">$840 Billion</div>
                 <p class="muted">Post-Money Valuation (Series H)</p>
                 <div style="margin-top: 20px;">
@@ -733,31 +683,18 @@ canvas { margin-top:10px; }
             </div>
         </div>
 
-
     </section>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     <!-- INFRASTRUCTURE SECTION -->
     <section id="infrastructure">
         <div class="card" style="margin-bottom: 20px;">
-            <h2 class="page-title"><i class="fa-solid fa-server" style="color: var(--primary)></i> The Hyperscale Arms Race</h2>
+            <h2 class="page-title"><i class="fa-solid fa-server" style="color: var(--primary)"></i> The Hyperscale Arms Race</h2>
             <p style="color:var(--text-muted); line-height: 1.6;">2026 collective CapEx among the "Big Five" is projected between $650B - $690B, exceeding the annual investment of the entire publicly traded U.S. energy sector by 4x. Compute is the most valuable commodity on Earth.</p>
         </div>
 
         <div class="dashboard">
             <div class="card" style="grid-column: 1 / -1; display: flex; flex-direction: column;">
-                <h3><i class="fa-solid fa-bolt" style="color: var(--primary)></i> 2025 vs 2026 Hyperscaler CapEx Projections (USD Billions)</h3>
+                <h3><i class="fa-solid fa-bolt" style="color: var(--primary)"></i> 2025 vs 2026 Hyperscaler CapEx Projections (USD Billions)</h3>
                 <div style="position: relative; flex-grow: 1; min-height: 300px; margin-top: 15px;">
                     <canvas id="hyperscalerCapExChart"></canvas>
                 </div>
@@ -788,14 +725,6 @@ canvas { margin-top:10px; }
 </div>
      
     </section>
-
-
-
-
-
-
-
-    
 
     <!-- ECONOMY SECTION -->
     <section id="economy">
@@ -831,11 +760,6 @@ canvas { margin-top:10px; }
             </div>
         </div>
     </section>
-
-
-
-
-    
 
     <!-- WORKFORCE SECTION -->
     <section id="work">
@@ -877,9 +801,11 @@ canvas { margin-top:10px; }
             </div>
         </div>
     </section>
-
-
-
+    
+    
+    
+    
+    
     
 
     <!-- GEOPOLITICS SECTION -->
@@ -893,37 +819,30 @@ canvas { margin-top:10px; }
             <div class="card">
                 <h3><i class="fa-solid fa-shield-halved"></i> Export Controls (2026 Rules)</h3>
                 <ul style="color:var(--text-muted); padding-left: 20px; line-height: 1.6; font-size: 14px;">
-                    <li><strong style="color:var(--text-main);">US 50% Volume Cap:</strong> Aggregate processing performance exported to China cannot exceed half of what is shipped to US customers.</li>
-                    <li><strong style="color:var(--text-main);">The Chinese Response:</strong> Accelerated domestic GPU development. Huawei & SMIC projected to produce 390,000 H200-equivalent chips in 2026.</li>
-                    <li><strong style="color:var(--text-main);">Bottleneck:</strong> Lack of access to high-end EUV lithography blocks China from competing effectively at 2nm/3nm nodes.</li>
+                    <li><strong style="color:var(--primary);">US 50% Volume Cap:</strong> Aggregate processing performance exported to China cannot exceed half of what is shipped to US customers.</li>
+                    <li><strong style="color:var(--primary);">The Chinese Response:</strong> Accelerated domestic GPU development. Huawei & SMIC projected to produce 390,000 H200-equivalent chips in 2026.</li>
+                    <li><strong style="color:var(--primary);">Bottleneck:</strong> Lack of access to high-end EUV lithography blocks China from competing effectively at 2nm/3nm nodes.</li>
                 </ul>
             </div>
             
-            <div class="card">
-                <h3><i class="fa-solid fa-flag"></i> Sovereign Compute Initiatives</h3>
-                <div style="margin-top: 15px;">
-                    <div style="margin-bottom: 15px;">
-                        <h4 style="color: var(--primary); margin: 0 0 5px 0;">🇸🇦 Saudi Arabia (HUMAIN)</h4>
-                        <p style="font-size: 13px; margin: 0; color: var(--text-muted);">Targeting 1.9 GW of capacity by 2030. "Full-stack" sovereign model from Arabic LLMs to local semiconductor ops.</p>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <h4 style="color: var(--primary); margin: 0 0 5px 0;">🇦🇪 UAE (MGX Fund)</h4>
-                        <p style="font-size: 13px; margin: 0; color: var(--text-muted);">$100B AUM target. Partnered with Nvidia/Mistral for a $43B Europe AI campus. Major backer of US Stargate.</p>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--primary); margin: 0 0 5px 0;">🇯🇵 Japan & 🇰🇷 South Korea</h4>
-                        <p style="font-size: 13px; margin: 0; color: var(--text-muted);">Japan commits $6.3B to national AI plan. Korea sees adoption surge to 30%+ of population via national skilling.</p>
-                    </div>
-                </div>
-            </div>
+<div class="card">
+    <h3><i class="fa-solid fa-flag"></i> Sovereign Compute Initiatives</h3>
+    <div style="margin-top: 20px;" class="div-spacing-fix"> <div style="margin-bottom: 25px;"> <h4 style="color: var(--primary); margin: 0 0 10px 0;">🇸🇦 Saudi Arabia (HUMAIN)</h4>
+            <p style="font-size: 14px; line-height: 1.8; margin: 0; color: var(--text-muted);">Targeting 1.9 GW of capacity by 2030. "Full-stack" sovereign model from Arabic LLMs to local semiconductor ops.</p>
+        </div>
+        
+        <div style="margin-bottom: 25px;"> <h4 style="color: var(--primary); margin: 0 0 10px 0;">🇦🇪 UAE (MGX Fund)</h4>
+            <p style="font-size: 14px; line-height: 1.8; margin: 0; color: var(--text-muted);">$100B AUM target. Partnered with Nvidia/Mistral for a $43B Europe AI campus. Major backer of US Stargate.</p>
+        </div>
+
+        <div>
+            <h4 style="color: var(--primary); margin: 0 0 10px 0;">🇯🇵 Japan & 🇰🇷 South Korea</h4>
+            <p style="font-size: 14px; line-height: 1.8; margin: 0; color: var(--text-muted);">Japan commits $6.3B to national AI plan. Korea sees adoption surge to 30%+ of population via national skilling.</p>
+        </div>
+    </div>
+</div>
         </div>
     </section>
-
-
-
-
-
-    
 
     <!-- TIMELINE SECTION -->
     <section id="timeline">
@@ -968,12 +887,6 @@ canvas { margin-top:10px; }
         </div>
     </section>
 
-
-
-
-
-                  
-
     <!-- SOURCES SECTION -->
     <section id="sources">
         <div class="card">
@@ -1017,10 +930,6 @@ canvas { margin-top:10px; }
 
 </div>
 </div>
-
-
-
-                  
 
 <script>
 function go(id){
@@ -1105,184 +1014,185 @@ window.onload = function() {
     animateValue("adoptionCounter", 78);
     animateValue("computeCounter", 450);
     animateValue("genAiShareCounter", 20);
-}
 
-Chart.defaults.color = '#a0a0a0';
-Chart.defaults.font.family = "'Inter', sans-serif";
+    // Initialize Charts inside onload to guarantee the canvas is ready
+    Chart.defaults.color = '#a0a0a0';
+    Chart.defaults.font.family = "'Inter', sans-serif";
 
-// Overview Chart 1: Hyperscaler CapEx Growth over time
-new Chart(document.getElementById("investmentChart"), {
-    type:"bar",
-    data:{
-        labels:["2022","2023","2024","2025 (Est)","2026 (Proj)"],
-        datasets:[{
-            label:"Top 5 CapEx (USD Billions)",
-            data:[140, 180, 252, 398.6, 690],
-            backgroundColor:"#ff5011",
-            borderRadius: 4
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { grid: { display: false } },
-            y: { grid: { color: 'rgba(255,255,255,0.05)' } }
-        }
-    }
-});
-
-// Overview Chart 2: Frontier Lab Valuations
-new Chart(document.getElementById("valuationChart"), {
-    type:"bar",
-    data:{
-        labels:["OpenAI", "Anthropic"],
-        datasets:[{
-            label:"Valuation (USD Billions)",
-            data:[840, 380],
-            backgroundColor:["#ff5011", "#d97757"],
-            borderRadius: 4
-        }]
-    },
-    options: {
-        responsive: true,
-        indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
-            y: { grid: { display: false } }
-        }
-    }
-});
-
-// Overview Chart 3: Enterprise Adoption Progression
-new Chart(document.getElementById("adoptionChart"), {
-    type:"line",
-    data:{
-        labels:["2018","2020","2022","2024","2026"],
-        datasets:[{
-            label:"Enterprise Adoption %",
-            data:[25,33,50,78,85],
-            borderColor:"#ff5011",
-            backgroundColor:"rgba(255, 80, 17, 0.1)",
-            borderWidth: 3,
-            fill: true,
-            tension: 0.3
-        }]
-    },
-    options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
-            y: { 
-                grid: { color: 'rgba(255,255,255,0.05)' },
-                min: 0,
-                max: 100
-            }
-        }
-    }
-});
-
-// Frontier Labs Chart: Progress of Players
-new Chart(document.getElementById("frontierProgressChart"), {
-    type: "line",
-    data: {
-        labels: ["2022", "2023", "2024", "2025", "2026"],
-        datasets: [
-            {
-                label: "OpenAI",
-                data: [20, 45, 75, 90, 100],
-                borderColor: "#ff5011",
-                backgroundColor: "rgba(255, 80, 17, 0.1)",
-                borderWidth: 3,
-                tension: 0.3
-            },
-            {
-                label: "Anthropic",
-                data: [0, 15, 40, 75, 92],
-                borderColor: "#d97757",
-                backgroundColor: "rgba(217, 119, 87, 0.1)",
-                borderWidth: 3,
-                tension: 0.3
-            },
-            {
-                label: "Google DeepMind",
-                data: [25, 40, 65, 85, 95],
-                borderColor: "#4285F4",
-                backgroundColor: "rgba(66, 133, 244, 0.1)",
-                borderWidth: 3,
-                tension: 0.3
-            },
-            {
-                label: "Meta",
-                data: [10, 20, 50, 70, 88],
-                borderColor: "#0668E1",
-                backgroundColor: "rgba(6, 104, 225, 0.1)",
-                borderWidth: 3,
-                tension: 0.3
-            },
-            {
-                label: "China (Frontier)",
-                data: [5, 15, 30, 60, 85],
-                borderColor: "#E60000",
-                backgroundColor: "rgba(230, 0, 0, 0.1)",
-                borderWidth: 3,
-                tension: 0.3
-            }
-        ]
-    },
-    options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        plugins: {
-            legend: { position: 'top', labels: { color: '#f5f5f5' } }
-        },
-        scales: {
-            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
-            y: { 
-                grid: { color: 'rgba(255,255,255,0.05)' },
-                min: 0,
-                max: 100,
-                title: { display: true, text: 'Relative Capability Index', color: '#a0a0a0' }
-            }
-        }
-    }
-});
-
-// Infrastructure Chart: CapEx Comparison 25 vs 26
-new Chart(document.getElementById("hyperscalerCapExChart"), {
-    type:"bar",
-    data:{
-        labels:["Amazon (AWS)", "Alphabet (Google)", "Microsoft", "Meta", "Oracle"],
-        datasets:[
-            {
-                label:"2025 Actual (Est.)",
-                data:[131, 91.4, 88.2, 72, 16],
-                backgroundColor:"rgba(255, 80, 17, 0.3)",
-                borderRadius: 4
-            },
-            {
-                label:"2026 Projected",
-                data:[200, 180, 120, 125, 50],
+    // Overview Chart 1: Hyperscaler CapEx Growth over time
+    new Chart(document.getElementById("investmentChart"), {
+        type:"bar",
+        data:{
+            labels:["2022","2023","2024","2025 (Est)","2026 (Proj)"],
+            datasets:[{
+                label:"Top 5 CapEx (USD Billions)",
+                data:[140, 180, 252, 398.6, 690],
                 backgroundColor:"#ff5011",
                 borderRadius: 4
-            }
-        ]
-    },
-    options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        plugins: {
-            legend: { position: 'top', labels: { color: '#f5f5f5' } }
+            }]
         },
-        scales: {
-            x: { grid: { display: false } },
-            y: { grid: { color: 'rgba(255,255,255,0.05)' } }
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { display: false } },
+                y: { grid: { color: 'rgba(255,255,255,0.05)' } }
+            }
         }
-    }
-});
+    });
+
+    // Overview Chart 2: Frontier Lab Valuations
+    new Chart(document.getElementById("valuationChart"), {
+        type:"bar",
+        data:{
+            labels:["OpenAI", "Anthropic"],
+            datasets:[{
+                label:"Valuation (USD Billions)",
+                data:[840, 380],
+                backgroundColor:["#ff5011", "#d97757"],
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Overview Chart 3: Enterprise Adoption Progression
+    new Chart(document.getElementById("adoptionChart"), {
+        type:"line",
+        data:{
+            labels:["2018","2020","2022","2024","2026"],
+            datasets:[{
+                label:"Enterprise Adoption %",
+                data:[25,33,50,78,85],
+                borderColor:"#ff5011",
+                backgroundColor:"rgba(255, 80, 17, 0.1)",
+                borderWidth: 3,
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { 
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+
+    // Frontier Labs Chart: Progress of Players
+    new Chart(document.getElementById("frontierProgressChart"), {
+        type: "line",
+        data: {
+            labels: ["2022", "2023", "2024", "2025", "2026"],
+            datasets: [
+                {
+                    label: "OpenAI",
+                    data: [20, 45, 75, 90, 100],
+                    borderColor: "#ff5011",
+                    backgroundColor: "rgba(255, 80, 17, 0.1)",
+                    borderWidth: 3,
+                    tension: 0.3
+                },
+                {
+                    label: "Anthropic",
+                    data: [0, 15, 40, 75, 92],
+                    borderColor: "#d97757",
+                    backgroundColor: "rgba(217, 119, 87, 0.1)",
+                    borderWidth: 3,
+                    tension: 0.3
+                },
+                {
+                    label: "Google DeepMind",
+                    data: [25, 40, 65, 85, 95],
+                    borderColor: "#4285F4",
+                    backgroundColor: "rgba(66, 133, 244, 0.1)",
+                    borderWidth: 3,
+                    tension: 0.3
+                },
+                {
+                    label: "Meta",
+                    data: [10, 20, 50, 70, 88],
+                    borderColor: "#0668E1",
+                    backgroundColor: "rgba(6, 104, 225, 0.1)",
+                    borderWidth: 3,
+                    tension: 0.3
+                },
+                {
+                    label: "China (Frontier)",
+                    data: [5, 15, 30, 60, 85],
+                    borderColor: "#E60000",
+                    backgroundColor: "rgba(230, 0, 0, 0.1)",
+                    borderWidth: 3,
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: { position: 'top', labels: { color: '#f5f5f5' } }
+            },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { 
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    min: 0,
+                    max: 100,
+                    title: { display: true, text: 'Relative Capability Index', color: '#a0a0a0' }
+                }
+            }
+        }
+    });
+
+    // Infrastructure Chart: CapEx Comparison 25 vs 26
+    new Chart(document.getElementById("hyperscalerCapExChart"), {
+        type:"bar",
+        data:{
+            labels:["Amazon (AWS)", "Alphabet (Google)", "Microsoft", "Meta", "Oracle"],
+            datasets:[
+                {
+                    label:"2025 Actual (Est.)",
+                    data:[131, 91.4, 88.2, 72, 16],
+                    backgroundColor:"rgba(255, 80, 17, 0.3)",
+                    borderRadius: 4
+                },
+                {
+                    label:"2026 Projected",
+                    data:[200, 180, 120, 125, 50],
+                    backgroundColor:"#ff5011",
+                    borderRadius: 4
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: { position: 'top', labels: { color: '#f5f5f5' } }
+            },
+            scales: {
+                x: { grid: { display: false } },
+                y: { grid: { color: 'rgba(255,255,255,0.05)' } }
+            }
+        }
+    });
+}
 </script>
 
 </body>
