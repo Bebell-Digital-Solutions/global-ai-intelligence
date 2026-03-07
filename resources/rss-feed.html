@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Intelligence - Live RSS Feeds</title>
+    <title>AI Intelligence | Live RSS Feeds</title>
     
     <!-- Fonts from Command Center Theme -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500&family=Fira+Code&display=swap" rel="stylesheet">
@@ -49,6 +49,26 @@
             font-family: var(--font-primary);
             line-height: 1.6;
         }
+        
+        
+        
+  
+  
+          ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #333; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         /* Standard Link Styling - Primary Orange */
         a {
@@ -606,6 +626,19 @@
                 margin: 10px 0 20px 0;
             }
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </style>
 </head>
 
@@ -620,14 +653,7 @@
             <h3><i class="fas fa-satellite-dish"></i> Intelligence Data Streams</h3>
 
             <div class="url-list" id="url-list">
-                <div class="url-item" data-feed-id="elnegocio">
-                    <span class="url-text">https://elnegocio.digital/rss</span>
-                    <span class="url-full">https://elnegocio.digital/rss</span>
-                    <div class="url-actions">
-                        <button class="url-btn">View</button>
-                        <button class="url-btn remove">Remove</button>
-                    </div>
-                </div>
+                
                 <div class="url-item" data-feed-id="openai">
                     <span class="url-text">https://openai.com/news/rss.xml</span>
                     <span class="url-full">https://openai.com/news/rss.xml</span>
@@ -714,22 +740,7 @@
         <div id="feeds-container">
             <!-- Feed sections will be added here dynamically -->
             
-            <section class="section" data-feed="elnegocio">
-                <div class="section-header">
-                    <h2 class="section-title">El Negocio Digital</h2>
-                    <a href="https://elnegocio.digital/" class="view-all" target="_blank">View Raw <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 3px;"></i></a>
-                </div>
-                <div class="cards-container" id="elnegocio-news">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>Establishing connection to data node...</p>
-                    </div>
-                </div>
-                <div class="mobile-carousel">
-                    <div class="carousel-container" id="elnegocio-carousel"></div>
-                </div>
-                <button class="section-load-more" data-feed="elnegocio" style="display: none;">Fetch More Packets</button>
-            </section>
+
 
             <section class="section" data-feed="openai">
                 <div class="section-header">
@@ -871,6 +882,76 @@
         </div>
         
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Widget BACK-TO-TOP -->
+<script>
+// Create Back-to-Top Button Dynamically
+document.addEventListener("DOMContentLoaded", function () {
+    // Create the button container
+    const backToTop = document.createElement("div");
+    backToTop.id = "back-to-top";
+    backToTop.style.position = "fixed";
+    backToTop.style.bottom = "20px";
+    backToTop.style.right = "20px";
+    backToTop.style.display = "none";
+    backToTop.style.cursor = "pointer";
+    backToTop.style.zIndex = "9999";
+
+    // Create the image inside the button
+    const backToTopImg = document.createElement("img");
+    backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/972c5065cffe83955d5322557dcdce28eca170e5.png";
+    backToTopImg.alt = "Volver arriba";
+    backToTopImg.style.width = "40px";
+    backToTopImg.style.height = "40px";
+
+    // Append image to the button
+    backToTop.appendChild(backToTopImg);
+
+    // Append button to the body
+    document.body.appendChild(backToTop);
+
+    // Scroll Event Listener
+    window.addEventListener("scroll", function () {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+
+    // Click Event for Scrolling to Top
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+<!-- End Widget BACK-TO-TOP -->
+
+
+
+
+
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
