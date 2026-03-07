@@ -550,61 +550,65 @@ canvas { margin-top:10px; }
     <section id="overview" class="active">
         <div class="dashboard-4col">
             <div class="card">
-                <h3><i class="fa-solid fa-money-bill-trend-up"></i> Top 5 CapEx (2026)</h3>
+                <h3><i class="fa-solid fa-money-bill-trend-up" style="color: var(--skin-color)"></i> Top 5 CapEx (2026)</h3>
                 <div class="metric">$<span id="capexCounter">0</span>B</div>
                 <p class="muted">Combined Hyperscaler Buildout</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-building"></i> OpenAI Valuation</h3>
+                <h3><i class="fa-solid fa-building" style="color: var(--skin-color)"></i> OpenAI Valuation</h3>
                 <div class="metric">$<span id="openaiValCounter">0</span>B</div>
                 <p class="muted">Largest private entity in history</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-microchip"></i> Nvidia Market Cap</h3>
+                <h3><i class="fa-solid fa-microchip" style="color: var(--skin-color)"></i> Nvidia Market Cap</h3>
                 <div class="metric">$<span id="nvidiaCounter">0</span>T</div>
                 <p class="muted">Driven by discrete GPU monopoly</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-bolt"></i> Stargate Capacity</h3>
+                <h3><i class="fa-solid fa-bolt" style="color: var(--skin-color)"></i> Stargate Capacity</h3>
                 <div class="metric"><span id="gwCounter">0</span> GW</div>
                 <p class="muted">National utility power target</p>
             </div>
-
-
-
             <div class="card">
-                <h3><i class="fa-solid fa-money-bill-trend-up"></i> Global AI Investment</h3>
+                <h3><i class="fa-solid fa-money-bill-trend-up" style="color: var(--skin-color)"></i> Global AI Investment</h3>
                 <div class="metric">$<span id="investmentCounter">0</span>B</div>
                 <p class="muted">USD billions</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-building"></i> Corporate Adoption</h3>
+                <h3><i class="fa-solid fa-building" style="color: var(--skin-color)"></i> Corporate Adoption</h3>
                 <div class="metric"><span id="adoptionCounter">0</span>%</div>
                 <p>% of companies using AI</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-microchip"></i> Generative AI Share</h3>
+                <h3><i class="fa-solid fa-microchip" style="color: var(--skin-color)"></i> Generative AI Share</h3>
                 <div class="metric"><span id="genAiShareCounter">0</span>%</div>
                 <p>portion of total AI investment</p>
             </div>
             <div class="card">
-                <h3><i class="fa-solid fa-server"></i> Global Compute</h3>
+                <h3><i class="fa-solid fa-server" style="color: var(--skin-color)"></i> Global Compute</h3>
                 <div class="metric" id="computeCounter">0</div>
                 <p class="muted">ExaFLOPs Capacity</p>
             </div>
         </div>
 
+
+      
+      
         <div class="dashboard">
             <div class="card">
                 <h3><i class="fa-solid fa-chart-column"></i> Global Hyperscaler CapEx Growth (USD Billions)</h3>
                 <canvas id="investmentChart"></canvas>
             </div>
+
+
+          
             <div class="card">
                 <h3><i class="fa-solid fa-chart-line"></i> Frontier Lab Valuations (Q1 2026)</h3>
                 <canvas id="valuationChart"></canvas>
             </div>
         </div>
 
+      
         <div class="dashboard">
             <div class="card" style="grid-column: 1 / -1; display: flex; flex-direction: column;">
                 <h3><i class="fa-solid fa-chart-line"></i> Enterprise Adoption Progression (%)</h3>
@@ -612,6 +616,8 @@ canvas { margin-top:10px; }
                     <canvas id="adoptionChart"></canvas>
                 </div>
             </div>
+
+          
         </div>
     </section>
     
