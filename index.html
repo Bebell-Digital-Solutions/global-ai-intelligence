@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Intelligence Command Center 2026-2036</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500&family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/954757f0260b2060e6b3824794ee5114949064bf.png">
+
+
+
+    
+
+<style>
+
+
+
+    
+:root {
+--primary:#ff5011;
+--secondary:#333333;
+--bg-dark:#000000;
+--bg-darker:#050505;
+--bg-card:#121212;
+--bg-hover:#1a1a1a;
+--text-main:#f5f5f5;
+--text-muted:#a0a0a0;
+--border:rgba(255,255,255,0.1);
+--success:#51cf66;
+--warning:#ffd43b;
+--danger:#ef4444;
+--shadow-glow:0 0 30px rgba(255,80,17,0.15);
+--transition:0.3s;
+--font-primary:'Inter',sans-serif;
+--font-code:'Fira Code',monospace;
+--font-tech:'Orbitron',monospace;
+}
+
+
+
+
+    
+
+* { box-sizing:border-box; }
+
+
+
+    
+
+body {
+margin:0;
+background:var(--bg-dark);
+color:var(--text-main);
+font-family:var(--font-primary);
+}
+
+
+
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #333; }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+
+
+
+
+.main-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+}
+
+
+
+
+    
+.live-badge {
+    color: var(--success);
+    font-size: 12px;
+    font-family: var(--font-tech);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    
+    /* Animation Properties */
+    transition: all 0.4s;
+    max-width: 100%; /* Initial width */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+
+
+    
+.live-badge:hover {
+    max-width: 250px; /* Expands on hover */
+    padding: 8px 25px;
+    background: var(--bg-hover);
+    border-color: var(--success);
+    letter-spacing: 1.2px; /* Techy expansion feel */
+    box-shadow: 0 0 15px rgba(81, 207, 102, 0.2); /* Subtle green glow */
+    transform: scale(1.05);
+}
+
+
+
+
+
+    
+.live-badge i { animation: pulse 2s infinite; }
+
+
+
+
+
+    
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+
+
+
+
+    
+.container {
+display: grid;
+grid-template-columns: 280px 1fr;
+height: 100vh;
+}
+
+
+
+
+
+    
+
+.sidebar {
+background: var(--bg-darker);
+border-right: 1px solid var(--border);
+padding: 20px;
+padding-top: 3rem;
+overflow: auto;
+position: relative; /* Essential for absolute positioning of children */
+display: flex;
+flex-direction: column;  
+}
+
+
+
+
+    
+.sidebar-brand {
+    text-align: center;
+    margin-bottom: 38px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+
+
+
+    
+
+.brand-logo {
+    width: 90px; /* Adjust size as needed */
+    height: auto;
+    filter: drop-shadow(0 0 5px rgba(255, 80, 17, 0.3)); /* Optional: adds a glow in your skin-color */
+  cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-bottom: 1rem;
+}
+
+
+
+
+    
+.brand-logo:hover {
+    /* Uses drop-shadow instead of text-shadow for images */
+    filter: drop-shadow(0 0 15px var(--primary)) brightness(1.2) blur(0.2px);
+    transform: scale(1.1) translateY(-5px);
+}
+
+
+
+
+
+    
+.sidebar-brand i {
+    font-size: 60px;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: block;
+    cursor: pointer;
+}
+
+
+
+
+    
+
+.sidebar-brand i:hover {
+    color: var(--primary);
+    text-shadow: 0 0 15px var(--bg-card);
+    filter: blur(0.5px) brightness(1.2);
+    transform: scale(1.1) translateY(-3px);    
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+
+    
+
+.sidebar-brand h2 {
+    font-family: var(--font-tech);
+    font-size: 28px;
+    margin: 0;
+    color: var(--text-main);
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+
+
+
+    
+.sidebar button {
+width:100%;
+padding:12px;
+margin-right: 0;
+margin-bottom:10px;
+background:var(--bg-card);
+border:1px solid var(--border);
+color:var(--text-main);
+cursor:pointer;
+border-radius:6px;
+transition:var(--transition);
+text-align: left;
+}
+
+
+    
+
+.sidebar button i {
+    width: 25px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+
+
+
+    
+.sidebar button:hover,
+.sidebar button.active-btn {
+background:var(--primary);
+}
+
+
+
+    
+.sidebar-footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+}
+
+
+
+    
+
+.version-tag {
+    font-family: var(--font-tech);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    transition: var(--transition);
+}
+
+
+
+    
+.version-tag:hover {
+    color: var(--primary);
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 80, 17, 0.4);
+}
+
+
+
+    
+.main {
+padding:25px;
+overflow:auto;
+    cursor: pointer;
+}
+
+
+
+    
+
+.main section {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+
+
+
+    
+.main section.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+    
+
+.dashboard {
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+margin-bottom: 20px;
+}
+
+
+    
+.dashboard-4col {
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+margin-bottom: 20px;
+}
+
+.card {
+background:var(--bg-card);
+border:1px solid var(--border);
+padding:20px;
+border-radius:10px;
+transition:var(--transition);
+box-shadow:var(--shadow-glow);
+}
+
+.card:hover { background:var(--bg-hover); }
+
+.card h3 {
+margin-top:0;
+font-size:18px;
+letter-spacing:1px;
+font-family:var(--font-tech);
+color: var(--text-main);
+}
+
+.page-title {
+margin-top:0;
+font-size:27px;
+letter-spacing:1px;
+font-family:var(--font-tech);
+color: var(--primary);
+margin-bottom: 20px;
+}
+
+/* Apply primary color to all icons in headings */
+h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
+    color: var(--primary);
+}
+
+/* Enhanced spacing for dashboard lists */
+.tech-list {
+    color: var(--text-muted);
+    padding-left: 20px;
+    font-size: 14px;
+    list-style-type: none; /* Optional: hides default bullets for a cleaner tech look */
+}
+
+.tech-list li {
+    margin-bottom: 15px; /* Adjust this value for more or less space */
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Optional: add custom techy bullets using your primary color */
+.tech-list li::before {
+    content: "▹";
+    color: var(--primary);
+    position: absolute;
+    left: -18px;
+}
+
+.tech-list li:last-child {
+    margin-bottom: 0;
+}
+
+.metric {
+font-size:36px;
+margin-top:10px;
+color:var(--primary);
+font-family:var(--font-tech);
+font-weight: 600;
+}
+
+.metric-small {
+font-size:24px;
+margin-top:5px;
+color:var(--text-main);
+font-family:var(--font-tech);
+}
+
+.muted {
+color: var(--text-muted);
+font-size: 14px;
+margin-top: 5px;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+}
+.flex-between:last-child { border-bottom: none; }
+
+.sourceGrid {
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+a.sourceCard {
+    display: block;
+    background: var(--bg-card);
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+a.sourceCard:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary);
+    box-shadow: 0 5px 15px rgba(255,80,17,0.2);
+}
+
+a.sourceCard i {
+    color: var(--primary);
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+a.sourceCard span {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+a.sourceCard p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+canvas { margin-top:10px; }
+
+@media(max-width:900px){
+.container { grid-template-columns:1fr; }
+.sidebar { display:flex; overflow-x:auto; }
+.sidebar button { min-width:160px; margin-right:10px; }
+}
+
+
+
+/* Increased spacing specifically for the Geopolitics Export Control list */
+#geopolitics .card ul li {
+    line-height: 1.8;      /* Significant space between lines of the same bullet */
+    margin-bottom: 20px;   /* Significant space between separate bullets */
+    display: block;        /* Ensures margins apply correctly */
+}
+
+
+
+#geopolitics .card ul li strong {
+    display: block;        /* Puts the label on its own line for a "stacked" look */
+    margin-bottom: 4px;
+}
+
+
+
+
+
+
+
+/* --- Vertical Timeline --- */
+.eco-timeline-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.eco-timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; bottom: 0;
+    transform: translateX(-50%);
+    width: 4px;
+    background-color: var(--primary);
+    border-radius: 2px;
+}
+
+.eco-entries { width: 100%; position: relative; }
+.eco-entries::after { content: ""; display: table; clear: both; }
+
+.eco-entry {
+    width: calc(50% - 40px);
+    float: left; clear: both; text-align: right; position: relative;
+}
+
+.eco-entry:not(:first-child) { margin-top: -30px; }
+
+.eco-entry .eco-title {
+    font-size: 24px;
+    font-family: var(--font-tech);
+    margin-bottom: 12px;
+    color: var(--primary);
+    position: relative;
+}
+
+.eco-entry .eco-title::before {
+    content: ''; position: absolute;
+    width: 12px; height: 12px;
+    border: 4px solid var(--primary);
+    background-color: var(--bg-card);
+    border-radius: 100%;
+    top: 50%; transform: translate(50%, -50%);
+    right: -40px; z-index: 1000;
+    box-shadow: 0 0 15px rgba(255,80,17,0.4);
+}
+
+.eco-entry .eco-title.big::before { width: 20px; height: 20px; }
+
+.eco-entry .eco-body {
+    color: var(--text-muted);
+    background: var(--bg-card);
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-glow);
+}
+
+.eco-entry .eco-body p { margin: 0; line-height: 1.5em; font-size: 14px; }
+
+.eco-entry:nth-child(2n) { text-align: left; float: right; }
+.eco-entry:nth-child(2n) .eco-title::before {
+    left: -40px; right: auto; transform: translate(-50%, -50%);
+}
+
+@media(max-width: 768px) {
+    .eco-timeline-container::before { left: 20px; transform: none; }
+    .eco-entry {
+        width: calc(100% - 50px);
+        float: right !important; clear: both; text-align: left !important;
+        margin-top: 20px !important;
+    }
+    .eco-entry .eco-title::before {
+        left: -30px !important; right: auto !important; transform: translate(-50%, -50%);
+    }
+}
+
+
+
+
+
+/* Banner Image Styles */
+.section-banner {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-glow);
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+    
+<script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
+<script>
+function init_tracer() { 
+   var tracer = new Tracer({  
+   websiteId : "ef958862-8094-40cc-bddf-743ce15088dc",  
+   async : true, 
+   debug : false }); 
+ } 
+ </script>
+
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+  
+    <div class="sidebar-brand">
+<img src="https://bucket.mlcdn.com/a/3336/3336910/images/b70a2366257c3d360371141467614834b2c66fa5.png" alt="Global AI Logo" class="brand-logo">      
+        <h2>Global AI<br>Intelligence</h2>
+    </div>
+      
+    <button onclick="go('overview')" class="active-btn"><i class="fa-solid fa-chart-line"></i> Overview</button>
+    <button onclick="go('frontier')"><i class="fa-solid fa-flask"></i> Frontier Labs</button>
+    <button onclick="go('infrastructure')"><i class="fa-solid fa-server"></i> Infrastructure</button>
+    <button onclick="go('economy')"><i class="fa-solid fa-coins"></i> Economy</button>
+    <button onclick="go('work')"><i class="fa-solid fa-robot"></i> Workforce</button>
+    <button onclick="go('geopolitics')"><i class="fa-solid fa-globe"></i> AI Race</button>
+    <button onclick="go('timeline')"><i class="fa-solid fa-clock"></i> Timeline</button>
+    <button onclick="go('sources')"><i class="fa-solid fa-database"></i> Sources</button>
+
+    <!-- Custom External Links (Copy/paste to add more) -->
+    <button onclick="loadExternal('https://bebell-digital-solutions.github.io/global-ai-intelligence/resources/library', this)"><i class="fa-solid fa-book-open"></i> Public Library</button>
+    <button onclick="loadExternal('https://bebell-digital-solutions.github.io/global-ai-intelligence/resources/glossary', this)"><i class="fa-solid fa-spell-check"></i> AI Glossary</button>
+    <button onclick="loadExternal('https://bebell-digital-solutions.github.io/global-ai-intelligence/resources/rss-feed', this)"><i class="fa-solid fa-rss"></i> RSS Feed</button>
+
+<div class="sidebar-footer">
+    <div class="version-tag">
+        <i class="fa-solid fa-code-branch"></i> v2.0.26-BETA
+    </div>
+</div>
+  
+</div>
+
+
+
+
+
+
+
+<div class="main">
+    <div class="main-header">    
+        <div class="live-badge">
+            <i class="fa-solid fa-circle"></i> Q1 2026 LIVE DATA
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- OVERVIEW SECTION -->
+    <section id="overview" class="active">
+        <div class="dashboard-4col">
+            <div class="card">
+                <h3><i class="fa-solid fa-money-bill-trend-up" style="color: var(--primary)"></i> Top 5 CapEx (2026)</h3>
+                <div class="metric">$<span id="capexCounter">0</span>B</div>
+                <p class="muted">Combined Hyperscaler Buildout</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-building" style="color: var(--primary)"></i> OpenAI Valuation</h3>
+                <div class="metric">$<span id="openaiValCounter">0</span>B</div>
+                <p class="muted">Largest private entity in history</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-microchip" style="color: var(--primary)"></i> Nvidia Market Cap</h3>
+                <div class="metric">$<span id="nvidiaCounter">0</span>T</div>
+                <p class="muted">Driven by discrete GPU monopoly</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-bolt" style="color: var(--primary)"></i> Stargate Capacity</h3>
+                <div class="metric"><span id="gwCounter">0</span> GW</div>
+                <p class="muted">National utility power target</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-money-bill-trend-up" style="color: var(--primary)"></i> Global AI Investment</h3>
+                <div class="metric">$<span id="investmentCounter">0</span>B</div>
+                <p class="muted">USD billions</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-building" style="color: var(--primary)"></i> Corporate Adoption</h3>
+                <div class="metric"><span id="adoptionCounter">0</span>%</div>
+                <p>% of companies using AI</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-microchip" style="color: var(--primary)"></i> Generative AI Share</h3>
+                <div class="metric"><span id="genAiShareCounter">0</span>%</div>
+                <p>portion of total AI investment</p>
+            </div>
+            
+            
+            <div class="card">
+                <h3><i class="fa-solid fa-server" style="color: var(--primary)"></i> Global Compute</h3>
+                <div class="metric" id="computeCounter">0</div>
+                <p class="muted">ExaFLOPs Capacity</p>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h3><i class="fa-solid fa-chart-column" style="color: var(--primary)"></i> Global Hyperscaler CapEx Growth (USD Billions)</h3>
+                <canvas id="investmentChart"></canvas>
+            </div>
+
+          
+            <div class="card">
+                <h3><i class="fa-solid fa-chart-line" style="color: var(--primary)"></i> Frontier Lab Valuations (Q1 2026)</h3>
+                <canvas id="valuationChart"></canvas>
+            </div>
+        </div>
+
+      
+        <div class="dashboard">
+            <div class="card" style="grid-column: 1 / -1; display: flex; flex-direction: column;">
+                <h3><i class="fa-solid fa-chart-line" style="color: var(--primary)"></i> Enterprise Adoption Progression (%)</h3>
+                <div style="position: relative; flex-grow: 1; min-height: 250px; margin-top: 15px;">
+                    <canvas id="adoptionChart"></canvas>
+                </div>
+            </div>
+
+          
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- FRONTIER LABS SECTION -->
+    <section id="frontier">
+        <div class="card" style="margin-bottom: 20px;">
+            <h2 class="page-title"><i class="fa-solid fa-flask"></i> Frontier Labs & Consolidation</h2>
+            <p style="color:var(--text-muted); line-height: 1.6;">The financial architecture of the AI sector in 2026 is defined by "mega-rounds" driving deep vertical integration between model development, hardware supply, and cloud infrastructure. A clear "winner-takes-most" market dynamic has emerged.</p>
+        </div>
+        
+        <div class="dashboard">
+            <div class="card" style="grid-column: 1 / -1; display: flex; flex-direction: column;">
+                <h3><i class="fa-solid fa-chart-line"></i> Frontier Model Capability Progression (2022 - 2026)</h3>
+                <div style="position: relative; flex-grow: 1; min-height: 300px; margin-top: 15px;">
+                    <canvas id="frontierProgressChart"></canvas>
+                </div>
+            </div>
+        </div>        
+        
+        <div class="dashboard">
+            <!-- OpenAI Card -->
+            <div class="card" style="border-top: 4px solid var(--primary);">
+                <h3><img src="https://bucket.mlcdn.com/a/3336/3336910/images/690ddf9a550e1aadf0466f170d673bffa3c2aa18.png" width="23" style="vertical-align: text-bottom; margin-right: 5px;"> OpenAI: The Trillion-Dollar Trajectory</h3>
+                <div class="metric">$840 Billion</div>
+                <p class="muted">Post-Money Valuation (Series H)</p>
+                <div style="margin-top: 20px;">
+                    <div class="flex-between"><span>Total Fundraise</span> <span class="metric-small" style="margin:0;">$110B</span></div>
+                    <div class="flex-between"><span>2026 Revenue Proj.</span> <span class="metric-small" style="margin:0;">$30B</span></div>
+                    <div class="flex-between"><span>Weekly Active Users</span> <span class="metric-small" style="margin:0;">900M+</span></div>
+                    <div class="flex-between"><span>Consumer Subs.</span> <span class="metric-small" style="margin:0;">50M+</span></div>
+                </div>
+                <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+                    <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-handshake"></i> <strong>Lead Investors:</strong> Amazon ($50B), SoftBank ($30B), Nvidia ($30B)</p>
+                </div>
+            </div>
+            
+            
+            
+            
+
+            <!-- Anthropic Card -->
+            <div class="card" style="border-top: 4px solid #d97757;">
+                <h3><img src="https://bucket.mlcdn.com/a/3336/3336910/images/45a42e0c1d6dc6b5b8884f901de92ce8b9015b7e.png" width="23" style="vertical-align: text-bottom; margin-right: 5px;"> Anthropic: Enterprise Reliability</h3>
+                <div class="metric" style="color:#d97757;">$380 Billion</div>
+                <p class="muted">Post-Money Valuation (Series G)</p>
+                <div style="margin-top: 20px;">
+                    <div class="flex-between"><span>Total Fundraise (Series G)</span> <span class="metric-small" style="margin:0;">$30B</span></div>
+                    <div class="flex-between"><span>Run-Rate Revenue</span> <span class="metric-small" style="margin:0;">$14B</span></div>
+                    <div class="flex-between"><span>Claude Code Rev.</span> <span class="metric-small" style="margin:0;">$2.5B</span></div>
+                    <div class="flex-between"><span>Global GitHub Commits</span> <span class="metric-small" style="margin:0;">4%</span></div>
+                </div>
+                <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+                    <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-handshake"></i> <strong>Lead Investors:</strong> GIC and Coatue. Focus on agentic workflows and "neutral" cross-cloud presence.</p>
+                </div>
+            </div>
+            
+            
+            
+            
+
+            <!-- Google DeepMind Card -->
+            <div class="card" style="border-top: 4px solid #4285F4;">
+                <h3><i class="fa-brands fa-google" style="margin-right: 5px; color: #4285F4;"></i> Google DeepMind: Integrated Stack</h3>
+                <div class="metric" style="color:#4285F4;">Gemini Era</div>
+                <p class="muted">Alphabet Internal Frontier Lab</p>
+                <div style="margin-top: 20px;">
+                    <div class="flex-between"><span>Google Cloud Run-Rate</span> <span class="metric-small" style="margin:0;">$70B+</span></div>
+                    <div class="flex-between"><span>Enterprise Backlog</span> <span class="metric-small" style="margin:0;">$240B</span></div>
+                    <div class="flex-between"><span>Hardware Base</span> <span class="metric-small" style="margin:0;">TPU v6/v7</span></div>
+                    <div class="flex-between"><span>Ecosystem</span> <span class="metric-small" style="margin:0;">Workspace</span></div>
+                </div>
+                <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+                    <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-server"></i> <strong>Strategic Focus:</strong> Vertical integration from custom silicon (Trillium/Ironwood) to Gemini Enterprise productivity tools.</p>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+
+            <!-- Meta Superintelligence Labs Card -->
+            <div class="card" style="border-top: 4px solid #0668E1;">
+                <h3><i class="fa-brands fa-meta" style="margin-right: 5px; color: #0668E1;"></i> Meta: Superintelligence Labs</h3>
+                <div class="metric" style="color:#0668E1;">Open OS</div>
+                <p class="muted">Llama Series Ecosystem</p>
+                <div style="margin-top: 20px;">
+                    <div class="flex-between"><span>2026 AI CapEx</span> <span class="metric-small" style="margin:0;">$135B</span></div>
+                    <div class="flex-between"><span>Distribution Base</span> <span class="metric-small" style="margin:0;">3B+ Users</span></div>
+                    <div class="flex-between"><span>Model Strategy</span> <span class="metric-small" style="margin:0;">Open-Weights</span></div>
+                    <div class="flex-between"><span>Primary Goal</span> <span class="metric-small" style="margin:0;">Agentic OS</span></div>
+                </div>
+                <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+                    <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-bullseye"></i> <strong>Strategic Focus:</strong> Defining the consumer-side "AI operating system" by integrating Llama-powered agents across social platforms.</p>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+
+            <!-- Chinese Frontier Models Card -->
+            <div class="card" style="border-top: 4px solid #E60000;">
+                <h3><i class="fa-solid fa-dragon" style="margin-right: 5px; color: #E60000;"></i> China: The Bifurcated Stack</h3>
+                <div class="metric" style="color:#E60000;">Sovereign</div>
+                <p class="muted">DeepSeek / Qwen / Ernie</p>
+                <div style="margin-top: 20px;">
+                    <div class="flex-between"><span>Domestic Chip Output</span> <span class="metric-small" style="margin:0;">390k / yr</span></div>
+                    <div class="flex-between"><span>Performance Cap</span> <span class="metric-small" style="margin:0;">US 50% Rule</span></div>
+                    <div class="flex-between"><span>Key Hurdle</span> <span class="metric-small" style="margin:0;">EUV Access</span></div>
+                    <div class="flex-between"><span>Focus Area</span> <span class="metric-small" style="margin:0;">Industrial AI</span></div>
+                </div>
+                <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+                    <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-shield-halved"></i> <strong>Strategic Focus:</strong> Accelerating domestic GPU development (Huawei/SMIC) to bypass stringent US export controls and maintain frontier parity.</p>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <!-- Microsoft Card -->
+<div class="card" style="border-top: 4px solid #00A4EF;">
+    <h3><i class="fa-brands fa-microsoft" style="margin-right: 5px; color: #00A4EF;"></i> Microsoft: The AI Platform</h3>
+    <div class="metric" style="color:#00A4EF;">$180B</div>
+    <p class="muted">Azure AI Revenue Run-Rate</p>
+    <div style="margin-top: 20px;">
+        <div class="flex-between"><span>Total Azure Run-Rate</span> <span class="metric-small" style="margin:0;">$250B</span></div>
+        <div class="flex-between"><span>GitHub Copilot Rev.</span> <span class="metric-small" style="margin:0;">$8B</span></div>
+        <div class="flex-between"><span>M365 Copilot Users</span> <span class="metric-small" style="margin:0;">75M</span></div>
+        <div class="flex-between"><span>OpenAI Stake</span> <span class="metric-small" style="margin:0;">49%</span></div>
+    </div>
+    <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+        <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-cloud"></i> <strong>Strategic Focus:</strong> Deep integration of OpenAI models across Azure, GitHub, and Microsoft 365, plus custom Maia AI accelerators.</p>
+    </div>
+</div>
+
+<!-- Nvidia Card -->
+<div class="card" style="border-top: 4px solid #76B900;">
+    <h3><i class="fa-solid fa-microchip" style="margin-right: 5px; color: #76B900;"></i> Nvidia: The AI Compute Backbone</h3>
+    <div class="metric" style="color:#76B900;">$4.2T</div>
+    <p class="muted">Market Cap (2026)</p>
+    <div style="margin-top: 20px;">
+        <div class="flex-between"><span>Data Center Run-Rate</span> <span class="metric-small" style="margin:0;">$250B</span></div>
+        <div class="flex-between"><span>AI GPU Shipments</span> <span class="metric-small" style="margin:0;">12M / yr</span></div>
+        <div class="flex-between"><span>CUDA Developers</span> <span class="metric-small" style="margin:0;">6M+</span></div>
+        <div class="flex-between"><span>AI Investments</span> <span class="metric-small" style="margin:0;">$50B+</span></div>
+    </div>
+    <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+        <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-chart-simple"></i> <strong>Strategic Focus:</strong> Dominant hardware/software moat (CUDA, NVLink) and strategic equity stakes in every major frontier lab.</p>
+    </div>
+</div>
+
+<!-- xAI Card -->
+<div class="card" style="border-top: 4px solid #f1f1f1;">
+    <h3><i class="fa-brands fa-x-twitter" style="margin-right: 5px; color: #f9f9f9;"></i> xAI: The Colossus Builder</h3>
+    <div class="metric" style="color:#f1f1f1;">$120B</div>
+    <p class="muted">Post-Money Valuation (Series C)</p>
+    <div style="margin-top: 20px;">
+        <div class="flex-between"><span>Total Fundraise</span> <span class="metric-small" style="margin:0;">$30B</span></div>
+        <div class="flex-between"><span>Grok Users</span> <span class="metric-small" style="margin:0;">150M</span></div>
+        <div class="flex-between"><span>Supercomputer Scale</span> <span class="metric-small" style="margin:0;">1M H100s</span></div>
+        <div class="flex-between"><span>X Integration</span> <span class="metric-small" style="margin:0;">Full</span></div>
+    </div>
+    <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+        <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-bolt"></i> <strong>Strategic Focus:</strong> Rapidly scaling the world’s largest supercomputer to achieve frontier models, tightly integrated with the X platform for real-time data.</p>
+    </div>
+</div>
+
+<!-- Amazon Card -->
+<div class="card" style="border-top: 4px solid #FF9900;">
+    <h3><i class="fa-brands fa-amazon" style="margin-right: 5px; color: #FF9900;"></i> Amazon: The Custom Silicon Giant</h3>
+    <div class="metric" style="color:#FF9900;">$90B</div>
+    <p class="muted">AWS AI Revenue Run-Rate</p>
+    <div style="margin-top: 20px;">
+        <div class="flex-between"><span>Total AWS Run-Rate</span> <span class="metric-small" style="margin:0;">$200B</span></div>
+        <div class="flex-between"><span>Trainium/Inferentia</span> <span class="metric-small" style="margin:0;">70% of AI workloads</span></div>
+        <div class="flex-between"><span>Anthropic Stake</span> <span class="metric-small" style="margin:0;">$50B invested</span></div>
+        <div class="flex-between"><span>Bedrock Customers</span> <span class="metric-small" style="margin:0;">150k+</span></div>
+    </div>
+    <div style="margin-top: 15px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
+        <p class="muted" style="margin: 0; font-size: 12px;"><i class="fa-solid fa-server"></i> <strong>Strategic Focus:</strong> Vertical integration with custom AI chips (Trainium/Inferentia) and the Bedrock platform, plus deep partnership with Anthropic.</p>
+    </div>
+</div>
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- INFRASTRUCTURE SECTION -->
+    <section id="infrastructure">
+        <div class="card" style="margin-bottom: 20px;">
+            <h2 class="page-title"><i class="fa-solid fa-server" style="color: var(--primary)"></i> The Hyperscale Arms Race</h2>
+            <p style="color:var(--text-muted); line-height: 1.6;">2026 collective CapEx among the "Big Five" is projected between $650B - $690B, exceeding the annual investment of the entire publicly traded U.S. energy sector by 4x. Compute is the most valuable commodity on Earth.</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="card" style="grid-column: 1 / -1; display: flex; flex-direction: column;">
+                <h3><i class="fa-solid fa-bolt" style="color: var(--primary)"></i> 2025 vs 2026 Hyperscaler CapEx Projections (USD Billions)</h3>
+                <div style="position: relative; flex-grow: 1; min-height: 300px; margin-top: 15px;">
+                    <canvas id="hyperscalerCapExChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+<div class="dashboard">
+    <div class="card">
+        <h3><i class="fa-solid fa-microchip"></i> Hardware Foundation</h3>
+        <ul class="tech-list">
+            <li><strong style="color:var(--text-main);">Nvidia Dominance:</strong> Hit $5T Market Cap. Record FY26 Data Center revenue of $193.7B with 75%+ margins.</li>
+            <li><strong style="color:var(--text-main);">Rubin (R100) Launch:</strong> Uses TSMC 3nm & HBM4. Reduces inference token costs by 10x, optimized for "agentic AI".</li>
+            <li><strong style="color:var(--text-main);">Custom Silicon:</strong> Google TPU v6 (Trillium), AWS Trainium2 (500k-chip Anthropic cluster), Microsoft Maia 200.</li>
+            <li><strong style="color:var(--text-main);">Supply Chain:</strong> TSMC N2 mass production underway. Nvidia is TSMC's largest N2 client for 2026.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3><i class="fa-solid fa-tower-broadcast"></i> Project Stargate</h3>
+        <p style="color:var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 15px;">The most ambitious infrastructure initiative in history. A public-private venture to build world-scale data centers functioning as a US national utility.</p>
+        <div>
+            <div class="flex-between"><span>Total Investment</span> <span class="metric-small" style="color:var(--success); margin:0;">$500B</span></div>
+            <div class="flex-between"><span>Power Target</span> <span class="metric-small" style="color:var(--warning); margin:0;">10 GW</span></div>
+            <div class="flex-between"><span>Partners</span> <span style="color:var(--text-main); font-size:14px; text-align:right;">OpenAI, SoftBank,<br>Oracle, MGX</span></div>
+        </div>
+        <p class="muted" style="font-size: 12px; margin-top: 15px;">* Major sites under construction in Abilene (TX), Port Washington (WI), NM, and OH.</p>
+    </div>
+</div>
+     
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- ECONOMY SECTION -->
+    <section id="economy">
+        <div class="card" style="margin-bottom: 30px;">
+            <h2 class="page-title"><i class="fa-solid fa-earth-americas"></i> Macroeconomic Impact (2030 Projections)</h2>
+            <p style="color:var(--text-muted); line-height: 1.6;">The long-term economic impact of AI is projected to be transformative. AI is expected to add the equivalent of Germany's economy to the world every year.</p>
+        </div>
+
+        <div class="dashboard-4col">
+            <div class="card" style="border-left: 3px solid var(--primary);">
+                <h3 style="color:var(--text-muted);">PwC Estimate</h3>
+                <div class="metric">$15.7T</div>
+                <p class="muted">Global GDP Impact</p>
+                <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">Driven by consumption-side effects and productivity.</p>
+            </div>
+            <div class="card" style="border-left: 3px solid var(--success);">
+                <h3 style="color:var(--text-muted);">McKinsey Estimate</h3>
+                <div class="metric">$13.0T</div>
+                <p class="muted">Global GDP Impact</p>
+                <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">Driven by substitution of labor by automation.</p>
+            </div>
+            <div class="card" style="border-left: 3px solid var(--warning);">
+                <h3 style="color:var(--text-muted);">Goldman Sachs</h3>
+                <div class="metric">$7.0T</div>
+                <p class="muted">Gen-AI Only Impact</p>
+                <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">1.5 percentage point annual productivity boost.</p>
+            </div>
+            <div class="card" style="border-left: 3px solid #8e44ad;">
+                <h3 style="color:var(--text-muted);">Regional Boost</h3>
+                <div class="metric-small" style="color:var(--primary); margin-top:10px;">China: +26%</div>
+                <div class="metric-small" style="color:var(--primary); margin-top:5px;">N. America: +14.5%</div>
+                <p class="muted" style="margin-top:15px;">Projected GDP increase by 2030.</p>
+            </div>
+        </div>
+
+<!-- ADDED FULL WIDTH BANNER WITH LINK -->
+<a href="https://projectfreedom.club" target="_blank" rel="noopener noreferrer">
+    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/0051097e41e800becf39e2033ca4de4859b6d50c.png" alt="Workforce Displacement Banner" class="section-banner">
+</a>
+        
+
+
+            
+
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- WORKFORCE SECTION -->
+    <section id="work">
+        <div class="card" style="margin-bottom: 20px;">
+            <h2 class="page-title"><i class="fa-solid fa-user-gear"></i> Workforce Displacement & Transformation</h2>
+            <p style="color:var(--text-muted); line-height: 1.6;">The World Economic Forum predicts mass workforce realignment over the next decade. The impact is most acute in knowledge-intensive sectors, where occupations in the 80th percentile of earnings are the most exposed to automation via agentic workflows.</p>
+        </div>
+
+        <div class="dashboard-4col">
+            <div class="card" style="text-align: center;">
+                <h3 style="color:var(--text-muted);">Jobs Transformed</h3>
+                <div class="metric" style="color:var(--primary);">1.1B</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color:var(--text-muted);">New Jobs Created</h3>
+                <div class="metric" style="color:var(--success);">170M</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color:var(--text-muted);">Roles Displaced</h3>
+                <div class="metric" style="color:var(--danger);">92M</div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3><i class="fa-solid fa-code-branch"></i> Future Scenarios</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                    <div style="background: rgba(81, 207, 102, 0.1); border: 1px solid var(--success); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--success); margin-top: 0;">Supercharged Progress Scenario</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 0;">Exponential AI breakthroughs combined with high workforce readiness lead to a productivity surge where humans act as "agent orchestrators".</p>
+                    </div>
+
+                  
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--danger); margin-top: 0;">Age of Displacement Scenario</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 0;">AI advancement outpaces the capacity to reskill, leading to unemployment spikes and wage polarization for knowledge workers.</p>
+                    </div>
+                </div>
+
+            </div>
+      </div>
+
+
+<!-- ADDED FULL WIDTH BANNER WITH LINK -->
+<a href="https://projectfreedom.club" target="_blank" rel="noopener noreferrer">
+    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/0051097e41e800becf39e2033ca4de4859b6d50c.png" alt="Workforce Displacement Banner" class="section-banner">
+</a>
+
+        
+    </section>
+    
+    
+    
+    
+    
+    
+
+    <!-- GEOPOLITICS SECTION -->
+    <section id="geopolitics">
+        <div class="card" style="margin-bottom: 20px;">
+            <h2 class="page-title"><i class="fa-solid fa-globe"></i> Sovereign AI & The Bifurcated Economy</h2>
+            <p style="color:var(--text-muted); line-height: 1.6;">Nations are building domestic compute capacity to ensure strategic autonomy, while heavy US export controls create a bifurcated global AI stack.</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h3><i class="fa-solid fa-shield-halved"></i> Export Controls (2026 Rules)</h3>
+                <ul style="color:var(--text-muted); padding-left: 20px; line-height: 1.6; font-size: 14px;">
+                    <li><strong style="color:var(--primary);">US 50% Volume Cap:</strong> Aggregate processing performance exported to China cannot exceed half of what is shipped to US customers.</li>
+                    <li><strong style="color:var(--primary);">The Chinese Response:</strong> Accelerated domestic GPU development. Huawei & SMIC projected to produce 390,000 H200-equivalent chips in 2026.</li>
+                    <li><strong style="color:var(--primary);">Bottleneck:</strong> Lack of access to high-end EUV lithography blocks China from competing effectively at 2nm/3nm nodes.</li>
+                </ul>
+            </div>
+            
+<div class="card">
+    <h3><i class="fa-solid fa-flag"></i> Sovereign Compute Initiatives</h3>
+    <div style="margin-top: 20px;" class="div-spacing-fix"> <div style="margin-bottom: 25px;"> <h4 style="color: var(--primary); margin: 0 0 10px 0;">🇸🇦 Saudi Arabia (HUMAIN)</h4>
+            <p style="font-size: 14px; line-height: 1.8; margin: 0; color: var(--text-muted);">Targeting 1.9 GW of capacity by 2030. "Full-stack" sovereign model from Arabic LLMs to local semiconductor ops.</p>
+        </div>
+        
+        <div style="margin-bottom: 25px;"> <h4 style="color: var(--primary); margin: 0 0 10px 0;">🇦🇪 UAE (MGX Fund)</h4>
+            <p style="font-size: 14px; line-height: 1.8; margin: 0; color: var(--text-muted);">$100B AUM target. Partnered with Nvidia/Mistral for a $43B Europe AI campus. Major backer of US Stargate.</p>
+        </div>
+
+        <div>
+            <h4 style="color: var(--primary); margin: 0 0 10px 0;">🇯🇵 Japan & 🇰🇷 South Korea</h4>
+            <p style="font-size: 14px; line-height: 1.8; margin: 0; color: var(--text-muted);">Japan commits $6.3B to national AI plan. Korea sees adoption surge to 30%+ of population via national skilling.</p>
+        </div>
+    </div>
+</div>
+        </div>
+        
+        
+        
+ 
+<!-- ADDED FULL WIDTH BANNER WITH LINK -->
+<a href="https://projectfreedom.club" target="_blank" rel="noopener noreferrer">
+    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/0051097e41e800becf39e2033ca4de4859b6d50c.png" alt="Workforce Displacement Banner" class="section-banner">
+</a>
+           
+        
+        
+        
+        
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- TIMELINE SECTION -->
+    <section id="timeline">
+        <div class="card" style="margin-bottom: 30px;">
+            <h2 class="page-title"><i class="fa-solid fa-clock"></i> The Infrastructure Supercycle Timeline</h2>
+            <p style="color:var(--text-muted);">Mapping the deployment phases of national-scale cognitive utilities.</p>
+        </div>
+
+        <div class="eco-timeline-container">
+            <div class="eco-entries">
+                <div class="eco-entry">
+                    <div class="eco-title big">2024-2025</div>
+                    <div class="eco-body">
+                        <p><strong>The Speculative Hype Phase:</strong> Massive capital influx into GenAI models. Nvidia launches Blackwell architecture, reducing inference costs 35x.</p>
+                    </div>
+                </div>
+                <div class="eco-entry">
+                    <div class="eco-title big">Early 2026</div>
+                    <div class="eco-body">
+                        <p><strong>The Mega-Rounds:</strong> OpenAI reaches $840B valuation via $110B raise. Anthropic hits $380B. TSMC begins mass production of 2nm nodes.</p>
+                    </div>
+                </div>
+                <div class="eco-entry">
+                    <div class="eco-title big">Late 2026</div>
+                    <div class="eco-body">
+                        <p><strong>Industrial Deployment:</strong> Hyperscaler CapEx approaches $700B annually. Launch of Nvidia Rubin optimized for agentic and physical AI.</p>
+                    </div>
+                </div>
+                <div class="eco-entry">
+                    <div class="eco-title big">2028</div>
+                    <div class="eco-body">
+                        <p><strong>Stargate Milestone:</strong> Port Washington campus reaches 1 GW capacity. Agentic workflows deeply integrated into global GitHub commits and knowledge work.</p>
+                    </div>
+                </div>
+                <div class="eco-entry">
+                    <div class="eco-title big">2030</div>
+                    <div class="eco-body">
+                        <p><strong>Macro Realignment:</strong> Global GDP boosted by up to $15.7T. Saudi HUMAIN initiative targets 1.9 GW. Sovereign AI compute becomes standard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+
+<!-- ADDED FULL WIDTH BANNER WITH LINK -->
+<a href="https://projectfreedom.club" target="_blank" rel="noopener noreferrer">
+    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/0051097e41e800becf39e2033ca4de4859b6d50c.png" alt="Workforce Displacement Banner" class="section-banner">
+</a>
+            
+        
+        
+        
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- SOURCES SECTION -->
+    <section id="sources">
+        <div class="card">
+            <h2 class="page-title"><i class="fa-solid fa-database"></i> Intelligence Sources (Q1 2026)</h2>
+            <p style="color:var(--text-muted);">Data pulled from frontier lab funding rounds, hyperscale CapEx projections, semiconductor manufacturing roadmaps, and sovereign investment strategies.</p>
+            <div class="sourceGrid">
+                <a href="#" class="sourceCard">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Venture Data (Series G/H)</span>
+                    <p>OpenAI & Anthropic private market valuations and capitalization tables.</p>
+                </a>
+                <a href="#" class="sourceCard">
+                    <i class="fa-solid fa-building"></i>
+                    <span>Hyperscaler Q1 Reports</span>
+                    <p>Forward guidance on 2026 CapEx from Amazon, Alphabet, Microsoft, Meta, Oracle.</p>
+                </a>
+                <a href="#" class="sourceCard">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>TSMC & Nvidia Roadmaps</span>
+                    <p>N2 wafer projections and R100/Blackwell hardware supply chain metrics.</p>
+                </a>
+                <a href="#" class="sourceCard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Macro Economic Models</span>
+                    <p>GDP and workforce projections by PwC, McKinsey, WEF, and Goldman Sachs.</p>
+                </a>
+
+
+
+
+<a href="https://www.iea.org/reports/energy-and-ai/energy-supply-for-ai" target="_blank" class="sourceCard">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>IEA Energy & Power Analysis</span>
+                    <p>Projections for 1,000+ TWh data center demand and the $80B "power backlog" affecting Azure and AWS.</p>
+                </a>
+
+                <a href="https://huggingface.co/spaces/lmarena-ai/chatbot-arena" target="_blank" class="sourceCard">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    <span>LMSYS & Hugging Face Metrics</span>
+                    <p>Live Elo ratings for Claude 4.6 and Gemini 3.1; tracking model performance parity and coding benchmarks.</p>
+                </a>
+
+                <a href="https://economicgraph.linkedin.com/research" target="_blank" class="sourceCard">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>LinkedIn AI at Work Report</span>
+                    <p>Data on 1.3M new AI roles and the 70% YoY increase in US roles requiring AI literacy.</p>
+                </a>
+
+                <a href="https://www.insideprivacy.com/artificial-intelligence/international-ai-safety-report-2026-examines-ai-capabilities-risks-and-safeguards/" target="_blank" class="sourceCard">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>International AI Safety Report</span>
+                    <p>2026 expert consensus on "reasoning" model risks and the 77% autonomous vulnerability discovery rate.</p>
+                </a>
+
+            </div>
+            
+        </div>
+        
+        
+        
+
+<!-- ADDED FULL WIDTH BANNER WITH LINK -->
+<a href="https://projectfreedom.club" target="_blank" rel="noopener noreferrer">
+    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/0051097e41e800becf39e2033ca4de4859b6d50c.png" alt="Workforce Displacement Banner" class="section-banner">
+</a>
+            
+     
+    </section>
+    
+    
+
+    <!-- EXTERNAL CONTENT IFRAME SECTION -->
+    
+    
+    
+    
+    
+    <section id="external-content">
+        <div class="card" style="height: calc(100vh - 120px); padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+            <div style="padding: 15px 20px; border-bottom: 1px solid var(--border); background: var(--bg-darker); display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-link" style="color: var(--primary);"></i>
+                <span id="iframe-title" style="font-family: var(--font-tech); font-size: 14px; color: var(--text-main);">External Content</span>
+            </div>
+            <iframe id="content-iframe" src="" style="width: 100%; flex-grow: 1; border: none; background: var(--bg-dark);"></iframe>
+        </div>
+    </section>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+<script>
+function go(id){
+    // 1. Hide all sections
+    const sections = document.querySelectorAll('.main section');
+    sections.forEach(sec => sec.classList.remove('active'));
+
+    // 2. Show the targeted section
+    const targetSection = document.getElementById(id);
+    if(targetSection) {
+        targetSection.classList.add('active');
+    }
+
+    // 3. Update the active state on the sidebar buttons
+    const buttons = document.querySelectorAll('.sidebar button');
+    buttons.forEach(btn => btn.classList.remove('active-btn'));
+    
+    // Find the button that triggers this specific section and add the active class
+    const targetButton = document.querySelector(`.sidebar button[onclick="go('${id}')"]`);
+    if(targetButton) {
+        targetButton.classList.add('active-btn');
+    }
+}
+
+// Function to handle custom URL iframe buttons
+function loadExternal(url, btnElement) {
+    // 1. Hide all sections
+    const sections = document.querySelectorAll('.main section');
+    sections.forEach(sec => sec.classList.remove('active'));
+
+    // 2. Show the iframe section
+    const targetSection = document.getElementById('external-content');
+    if(targetSection) {
+        targetSection.classList.add('active');
+    }
+
+    // 3. Set the iframe source and title
+    document.getElementById('content-iframe').src = url;
+    document.getElementById('iframe-title').innerText = btnElement.innerText.trim();
+
+    // 4. Update the active state on the sidebar buttons
+    const buttons = document.querySelectorAll('.sidebar button');
+    buttons.forEach(btn => btn.classList.remove('active-btn'));
+    btnElement.classList.add('active-btn');
+}
+
+function animateValue(id, end, decimals = 0){
+    let obj = document.getElementById(id);
+    if (!obj) return; 
+
+    let duration = 2000;
+    let startTime = null;
+
+    function animation(currentTime){
+        if(!startTime) startTime = currentTime;
+        let progress = currentTime - startTime;
+        
+        let value = Math.min((progress / duration) * end, end);
+        
+        if (decimals > 0) {
+            obj.innerHTML = value.toFixed(decimals);
+        } else {
+            obj.innerHTML = Math.floor(value);
+        }
+        
+        if(progress < duration) {
+            requestAnimationFrame(animation);
+        } else {
+            obj.innerHTML = decimals > 0 ? end.toFixed(decimals) : end; 
+        }
+    }
+    requestAnimationFrame(animation);
+}
+
+// Ensure variables animate properly when the DOM is ready
+window.onload = function() {
+    animateValue("capexCounter", 690);
+    animateValue("openaiValCounter", 840);
+    animateValue("nvidiaCounter", 5);
+    animateValue("gwCounter", 10);
+    animateValue("investmentCounter", 258);
+    animateValue("adoptionCounter", 78);
+    animateValue("computeCounter", 450);
+    animateValue("genAiShareCounter", 20);
+
+    // Initialize Charts inside onload to guarantee the canvas is ready
+    Chart.defaults.color = '#a0a0a0';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
+    // Overview Chart 1: Hyperscaler CapEx Growth over time
+    new Chart(document.getElementById("investmentChart"), {
+        type:"bar",
+        data:{
+            labels:["2022","2023","2024","2025 (Est)","2026 (Proj)"],
+            datasets:[{
+                label:"Top 5 CapEx (USD Billions)",
+                data:[140, 180, 252, 398.6, 690],
+                backgroundColor:"#ff5011",
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { display: false } },
+                y: { grid: { color: 'rgba(255,255,255,0.05)' } }
+            }
+        }
+    });
+
+    // Overview Chart 2: Frontier Lab Valuations
+    new Chart(document.getElementById("valuationChart"), {
+        type:"bar",
+        data:{
+            labels:["OpenAI", "Anthropic"],
+            datasets:[{
+                label:"Valuation (USD Billions)",
+                data:[840, 380],
+                backgroundColor:["#ff5011", "#d97757"],
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Overview Chart 3: Enterprise Adoption Progression
+    new Chart(document.getElementById("adoptionChart"), {
+        type:"line",
+        data:{
+            labels:["2018","2020","2022","2024","2026"],
+            datasets:[{
+                label:"Enterprise Adoption %",
+                data:[25,33,50,78,85],
+                borderColor:"#ff5011",
+                backgroundColor:"rgba(255, 80, 17, 0.1)",
+                borderWidth: 3,
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { 
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+    
+    
+    
+    
+    
+    
+    
+
+// Frontier Labs Chart: Progress of Players (updated with xAI)
+new Chart(document.getElementById("frontierProgressChart"), {
+    type: "line",
+    data: {
+        labels: ["2022", "2023", "2024", "2025", "2026"],
+        datasets: [
+            {
+                label: "OpenAI",
+                data: [20, 45, 75, 90, 100],
+                borderColor: "#ff5011",
+                backgroundColor: "rgba(255, 80, 17, 0.1)",
+                borderWidth: 3,
+                tension: 0.3
+            },
+            {
+                label: "Anthropic",
+                data: [0, 15, 40, 75, 92],
+                borderColor: "#d97757",
+                backgroundColor: "rgba(217, 119, 87, 0.1)",
+                borderWidth: 3,
+                tension: 0.3
+            },
+            {
+                label: "Google DeepMind",
+                data: [25, 40, 65, 85, 95],
+                borderColor: "#4285F4",
+                backgroundColor: "rgba(66, 133, 244, 0.1)",
+                borderWidth: 3,
+                tension: 0.3
+            },
+            {
+                label: "Meta",
+                data: [10, 20, 50, 70, 88],
+                borderColor: "#0668E1",
+                backgroundColor: "rgba(6, 104, 225, 0.1)",
+                borderWidth: 3,
+                tension: 0.3
+            },
+            {
+                label: "China (Frontier)",
+                data: [5, 15, 30, 60, 85],
+                borderColor: "#E60000",
+                backgroundColor: "rgba(230, 0, 0, 0.1)",
+                borderWidth: 3,
+                tension: 0.3
+            },
+            {
+                label: "xAI",
+                data: [0, 10, 40, 70, 90],
+                borderColor: "#AAAAAA",
+                backgroundColor: "rgba(170, 170, 170, 0.1)",
+                borderWidth: 3,
+                tension: 0.3
+            }
+        ]
+    },
+    options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: { position: 'top', labels: { color: '#f5f5f5' } }
+        },
+        scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { 
+                grid: { color: 'rgba(255,255,255,0.05)' },
+                min: 0,
+                max: 100,
+                title: { display: true, text: 'Relative Capability Index', color: '#a0a0a0' }
+            }
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+    // Infrastructure Chart: CapEx Comparison 25 vs 26
+    new Chart(document.getElementById("hyperscalerCapExChart"), {
+        type:"bar",
+        data:{
+            labels:["Amazon (AWS)", "Alphabet (Google)", "Microsoft", "Meta", "Oracle"],
+            datasets:[
+                {
+                    label:"2025 Actual (Est.)",
+                    data:[131, 91.4, 88.2, 72, 16],
+                    backgroundColor:"rgba(255, 80, 17, 0.3)",
+                    borderRadius: 4
+                },
+                {
+                    label:"2026 Projected",
+                    data:[200, 180, 120, 125, 50],
+                    backgroundColor:"#ff5011",
+                    borderRadius: 4
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: { position: 'top', labels: { color: '#f5f5f5' } }
+            },
+            scales: {
+                x: { grid: { display: false } },
+                y: { grid: { color: 'rgba(255,255,255,0.05)' } }
+            }
+        }
+    });
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Widget BACK-TO-TOP -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Create the button container
+    const backToTop = document.createElement("div");
+    backToTop.id = "back-to-top";
+    backToTop.style.position = "fixed";
+    backToTop.style.bottom = "20px";
+    backToTop.style.right = "20px";
+    backToTop.style.display = "none";
+    backToTop.style.cursor = "pointer";
+    backToTop.style.zIndex = "9999";
+
+    // Create the image inside the button
+    const backToTopImg = document.createElement("img");
+    backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/972c5065cffe83955d5322557dcdce28eca170e5.png";
+    backToTopImg.alt = "Volver arriba";
+    backToTopImg.style.width = "40px";
+    backToTopImg.style.height = "40px";
+
+    // Append image to the button
+    backToTop.appendChild(backToTopImg);
+
+    // Append button to the body
+    document.body.appendChild(backToTop);
+
+    // Scroll Event Listener
+    window.addEventListener("scroll", function () {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+
+    // Click Event for Scrolling to Top
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+<!-- End Widget BACK-TO-TOP -->
+
+
+
+
+
+
+      
+      <script>
+            (function(d,t){
+                var hs=d.createElement(t),s=d.getElementsByTagName(t)[0];
+                hs.src='https://app.productdyno.com/assets/js/protect.js';
+                hs.setAttribute('data-auth-type', 'product');
+                hs.setAttribute('data-auth-type-id', '42125');
+                s.parentNode.insertBefore(hs,s)
+            }(document,'script'));
+        </script>
+        
+
+
+
+
+
+
+
+
+
+
+
+    
+
+</body>
+</html>
