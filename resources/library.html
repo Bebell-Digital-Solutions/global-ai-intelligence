@@ -1,1 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Library Archive</title>
 
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #ff5011;
+            --secondary: #333333;
+            --bg-dark: #000000;
+            --bg-darker: #050505;
+            --bg-card: #121212;
+            --bg-hover: #1a1a1a;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --border: rgba(255,255,255,0.1);
+            --success: #51cf66;
+            --warning: #ffd43b;
+            --danger: #ef4444;
+            --shadow-glow: 0 0 30px rgba(255,80,17,0.15);
+            --transition: 0.3s;
+            --font-primary: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
+            --font-tech: 'Orbitron', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 25px; /* Adds space around the entire iframe content */
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #333; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+        /* Typography */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: 27px;
+            letter-spacing: 1px;
+            font-family: var(--font-tech);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-title i {
+            color: var(--primary);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 12px; padding: 25px;
+            width: 100%; max-width: 550px;
+            box-shadow: var(--shadow-glow);
+            transform: translateY(20px); transition: transform 0.3s;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;
+        }
+        .modal-header h2 { margin: 0; font-family: var(--font-tech); color: var(--primary); font-size: 20px; }
+        .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; transition: var(--transition); }
+        .close-btn:hover { color: var(--danger); }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text-main); font-size: 14px; font-family: var(--font-tech); letter-spacing: 0.5px;}
+        .form-control { 
+            width: 100%; padding: 12px; background: var(--bg-darker); 
+            border: 1px solid var(--border); color: var(--text-main); 
+            border-radius: 6px; font-family: var(--font-primary); transition: var(--transition);
+        }
+        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px rgba(255,80,17,0.1); }
+        textarea.form-control { resize: vertical; min-height: 80px; }
+        
+        .file-upload-wrapper {
+            position: relative; overflow: hidden; display: inline-block; width: 100%;
+        }
+        .file-upload-wrapper input[type=file] {
+            font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; height: 100%;
+        }
+        .btn-upload {
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+            background: var(--bg-darker); border: 1px dashed var(--primary); color: var(--text-main);
+            padding: 15px; border-radius: 6px; text-align: center; cursor: pointer; transition: var(--transition);
+        }
+        .file-upload-wrapper:hover .btn-upload { background: rgba(255,80,17,0.1); }
+        
+        .modal-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 25px; }
+        .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: var(--transition); }
+        .btn-cancel:hover { background: var(--bg-hover); color: var(--text-main); }
+        .btn-submit { background: var(--primary); border: 1px solid var(--primary); color: #fff; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: var(--transition); font-family: var(--font-tech); }
+        .btn-submit:hover { box-shadow: var(--shadow-glow); transform: translateY(-2px); }
+
+        /* Grid Layout */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Custom Library Card Design */
+        .library-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px; /* Padding inside the card to create the requested margin around the image */
+            transition: var(--transition);
+            box-shadow: var(--shadow-glow);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .library-card:hover {
+            background: var(--bg-hover);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,80,17,0.25);
+        }
+
+        /* Image Container */
+        .card-image-wrapper {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background: var(--bg-darker);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: all 0.5s ease;
+        }
+
+        .library-card:hover .card-image-wrapper img {
+            opacity: 1;
+            transform: scale(1.08); /* Slight zoom effect on hover */
+        }
+
+        /* Card Text Elements */
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-family: var(--font-tech);
+            color: var(--primary);
+            font-size: 18px;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .card-subtitle {
+            font-family: var(--font-primary);
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--text-main);
+            opacity: 0.6;
+            border-top: 1px dashed var(--border);
+            padding-top: 12px;
+        }
+
+        .card-meta i {
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .library-card {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        /* Staggered animation delays for a nice loading effect */
+        .library-card:nth-child(1) { animation-delay: 0.1s; }
+        .library-card:nth-child(2) { animation-delay: 0.15s; }
+        .library-card:nth-child(3) { animation-delay: 0.2s; }
+        .library-card:nth-child(4) { animation-delay: 0.25s; }
+        .library-card:nth-child(5) { animation-delay: 0.3s; }
+        .library-card:nth-child(6) { animation-delay: 0.35s; }
+        .library-card:nth-child(7) { animation-delay: 0.4s; }
+        .library-card:nth-child(8) { animation-delay: 0.45s; }
+        .library-card:nth-child(9) { animation-delay: 0.5s; }
+        .library-card:nth-child(10) { animation-delay: 0.55s; }
+        .library-card:nth-child(11) { animation-delay: 0.6s; }
+        .library-card:nth-child(12) { animation-delay: 0.65s; }
+
+        /* Custom CTA Button */
+        .custom-cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--primary);
+            font-family: var(--font-tech);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 12px 20px;
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            cursor: pointer;
+            margin-top: auto; /* Pushes button perfectly to the bottom of the card */
+        }
+
+        .custom-cta-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 80, 17, 0.4);
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1 class="page-title">
+            <i class="fas fa-globe"></i> Global Knowledge Repositories
+        </h1>
+        <button id="openModalBtn" class="custom-cta-btn" style="margin: 0; padding: 10px 20px;">
+            <i class="fas fa-plus-circle"></i> Add Entry
+        </button>
+    </div>
+
+    <div class="library-grid" id="libraryGrid">
+        
+        <!-- Archive.org -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="Internet Archive">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Internet Archive</h3>
+                <p class="card-subtitle">Non-profit library of millions of free books, movies, software, music, websites, and more.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-server"></i> 800B+ Pages</span>
+                    <span><i class="fas fa-book"></i> 41M+ Books</span>
+                </div>
+                <a href="https://archive.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- Project Gutenberg -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="Project Gutenberg">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Project Gutenberg</h3>
+                <p class="card-subtitle">The oldest digital library offering over 70,000 free e-books, focusing on older works with expired US copyright.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-book-open"></i> Free eBooks</span>
+                    <span><i class="fas fa-download"></i> Open Access</span>
+                </div>
+                <a href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- arXiv -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="arXiv">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">arXiv.org</h3>
+                <p class="card-subtitle">Open-access repository of electronic preprints and research papers in physics, mathematics, and computer science.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-atom"></i> STEM Research</span>
+                    <span><i class="fas fa-file-pdf"></i> 2.4M+ Papers</span>
+                </div>
+                <a href="https://arxiv.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- CORE -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="CORE">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">CORE</h3>
+                <p class="card-subtitle">The world's largest collection of open access research papers, aggregating millions of articles from global repositories.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-database"></i> 300M+ Articles</span>
+                    <span><i class="fas fa-search"></i> Global Aggregator</span>
+                </div>
+                <a href="https://core.ac.uk/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- PubMed Central -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="PubMed Central">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">PubMed Central (PMC)</h3>
+                <p class="card-subtitle">Free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-dna"></i> Biosciences</span>
+                    <span><i class="fas fa-notes-medical"></i> 10M+ Articles</span>
+                </div>
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- DOAJ -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="DOAJ">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">DOAJ</h3>
+                <p class="card-subtitle">Directory of Open Access Journals. Community-curated online directory that indexes high-quality, open access journals.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-unlock-alt"></i> Open Access</span>
+                    <span><i class="fas fa-journal-whills"></i> 20,000+ Journals</span>
+                </div>
+                <a href="https://doaj.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- Open Library -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="Open Library">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Open Library</h3>
+                <p class="card-subtitle">An initiative of the Internet Archive, striving to create a web page for every book ever published with digital lending.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-book-reader"></i> Digital Lending</span>
+                    <span><i class="fas fa-wifi"></i> Global Network</span>
+                </div>
+                <a href="https://openlibrary.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- Library of Congress -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="Library of Congress">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Library of Congress</h3>
+                <p class="card-subtitle">The largest library in the world, providing digital access to historical documents, photos, maps, and audio.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-landmark"></i> Historical Data</span>
+                    <span><i class="fas fa-map"></i> US & Global</span>
+                </div>
+                <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- HathiTrust -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="HathiTrust">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">HathiTrust Digital Library</h3>
+                <p class="card-subtitle">A partnership of academic & research institutions, offering a collection of millions of titles digitized from libraries around the world.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-university"></i> Academic Network</span>
+                    <span><i class="fas fa-archive"></i> 18M+ Items</span>
+                </div>
+                <a href="https://www.hathitrust.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+        
+        <!-- Zenodo -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="Zenodo">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Zenodo</h3>
+                <p class="card-subtitle">General-purpose open repository developed under the European OpenAIRE program, enabling researchers to deposit datasets, scripts, and papers.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-box-open"></i> Raw Datasets</span>
+                    <span><i class="fas fa-code-branch"></i> Software & Scripts</span>
+                </div>
+                <a href="https://zenodo.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- PLOS -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="PLOS">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">PLOS</h3>
+                <p class="card-subtitle">Public Library of Science. A nonprofit publisher and advocacy organization accelerating progress in science and medicine.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-flask"></i> Science & Med</span>
+                    <span><i class="fas fa-globe-americas"></i> Advocacy</span>
+                </div>
+                <a href="https://plos.org/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+        <!-- Europeana -->
+        <div class="library-card">
+            <div class="card-image-wrapper">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png" alt="Europeana">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Europeana</h3>
+                <p class="card-subtitle">Digital platform of the European Union, granting access to millions of books, music, artworks, and more from European archives.</p>
+                <div class="card-meta" style="margin-bottom: 20px;">
+                    <span><i class="fas fa-palette"></i> Cultural Heritage</span>
+                    <span><i class="fas fa-music"></i> Art & Media</span>
+                </div>
+                <a href="https://www.europeana.eu/" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                    <i class="fas fa-satellite-dish"></i> Access Database
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Add Entry Modal -->
+    <div class="modal-overlay" id="addEntryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-database"></i> Add New Archive</h2>
+                <button class="close-btn" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="addEntryForm">
+                <div class="form-group">
+                    <label>Archive Title</label>
+                    <input type="text" id="entryTitle" class="form-control" placeholder="e.g. Classified Sector 7" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="entryDesc" class="form-control" placeholder="Brief details about the repository..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Destination URL</label>
+                    <input type="url" id="entryUrl" class="form-control" placeholder="https://..." required>
+                </div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Meta Tag 1 (e.g. Size)</label>
+                        <input type="text" id="entryMeta1" class="form-control" placeholder="e.g. 500GB Files">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Meta Tag 2 (e.g. Type)</label>
+                        <input type="text" id="entryMeta2" class="form-control" placeholder="e.g. PDF/DOC">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Cover Image (Optional)</label>
+                    <div class="file-upload-wrapper">
+                        <div class="btn-upload" id="uploadLabel">
+                            <i class="fas fa-cloud-upload-alt"></i> <span>Click to Upload via API / Local</span>
+                        </div>
+                        <input type="file" id="entryImage" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Save Entry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('addEntryModal');
+            const openBtn = document.getElementById('openModalBtn');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('addEntryForm');
+            const grid = document.getElementById('libraryGrid');
+            const fileInput = document.getElementById('entryImage');
+            const uploadLabel = document.querySelector('#uploadLabel span');
+
+            // Default image
+            const defaultImage = "https://bucket.mlcdn.com/a/3336/3336910/images/37b2238ffc569c4db5bec6db069b713c48a02ee0.png";
+            let currentBase64Image = null;
+
+            // Modal Toggles
+            const openModal = () => modal.classList.add('active');
+            const closeModal = () => {
+                modal.classList.remove('active');
+                form.reset();
+                uploadLabel.textContent = "Click to Upload via API / Local";
+                currentBase64Image = null;
+            };
+
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+
+            // Close on outside click
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) closeModal();
+            });
+
+            // Handle Image Upload (Simulating API Storage via base64 for immediate frontend preview)
+            // Note: In a production environment with a backend, you'd replace the FileReader logic 
+            // with a fetch/axios POST request to your cloud storage API (like S3 or ImgBB).
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    uploadLabel.textContent = file.name;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        currentBase64Image = event.target.result; // Saves base64 Data URL to inject into DOM
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Handle Form Submission
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get Values
+                const title = document.getElementById('entryTitle').value;
+                const desc = document.getElementById('entryDesc').value;
+                const url = document.getElementById('entryUrl').value;
+                const meta1 = document.getElementById('entryMeta1').value || "Classified Data";
+                const meta2 = document.getElementById('entryMeta2').value || "Secure Node";
+                
+                // Determine Image (Custom API Upload or Default)
+                const finalImage = currentBase64Image ? currentBase64Image : defaultImage;
+
+                // Create HTML for the new Library Card
+                const cardHTML = `
+                    <div class="library-card" style="animation: fadeIn 0.3s ease-out forwards;">
+                        <div class="card-image-wrapper">
+                            <img src="${finalImage}" alt="${title}">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${title}</h3>
+                            <p class="card-subtitle">${desc}</p>
+                            <div class="card-meta" style="margin-bottom: 20px;">
+                                <span><i class="fas fa-hdd"></i> ${meta1}</span>
+                                <span><i class="fas fa-network-wired"></i> ${meta2}</span>
+                            </div>
+                            <a href="${url}" target="_blank" rel="noopener noreferrer" class="custom-cta-btn">
+                                <i class="fas fa-satellite-dish"></i> Access Database
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                // Insert into the top of the grid
+                grid.insertAdjacentHTML('afterbegin', cardHTML);
+
+                // Close Modal
+                closeModal();
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Widget BACK-TO-TOP -->
+<script>
+// Create Back-to-Top Button Dynamically
+document.addEventListener("DOMContentLoaded", function () {
+    // Create the button container
+    const backToTop = document.createElement("div");
+    backToTop.id = "back-to-top";
+    backToTop.style.position = "fixed";
+    backToTop.style.bottom = "20px";
+    backToTop.style.right = "20px";
+    backToTop.style.display = "none";
+    backToTop.style.cursor = "pointer";
+    backToTop.style.zIndex = "9999";
+
+    // Create the image inside the button
+    const backToTopImg = document.createElement("img");
+    backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/972c5065cffe83955d5322557dcdce28eca170e5.png";
+    backToTopImg.alt = "Volver arriba";
+    backToTopImg.style.width = "40px";
+    backToTopImg.style.height = "40px";
+
+    // Append image to the button
+    backToTop.appendChild(backToTopImg);
+
+    // Append button to the body
+    document.body.appendChild(backToTop);
+
+    // Scroll Event Listener
+    window.addEventListener("scroll", function () {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+
+    // Click Event for Scrolling to Top
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+<!-- End Widget BACK-TO-TOP -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</body>
+</html>
