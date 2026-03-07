@@ -14,7 +14,15 @@
     <!-- Favicon -->
     <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/954757f0260b2060e6b3824794ee5114949064bf.png">
 
+
+
+    
+
 <style>
+
+
+
+    
 :root {
 --primary:#ff5011;
 --secondary:#333333;
@@ -35,7 +43,16 @@
 --font-tech:'Orbitron',monospace;
 }
 
+
+
+
+    
+
 * { box-sizing:border-box; }
+
+
+
+    
 
 body {
 margin:0;
@@ -43,8 +60,6 @@ background:var(--bg-dark);
 color:var(--text-main);
 font-family:var(--font-primary);
 }
-
-
 
 
 
@@ -58,15 +73,16 @@ font-family:var(--font-primary);
 
 
 
-
-    
-
 .main-header {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 25px;
 }
 
+
+
+
+    
 .live-badge {
     color: var(--success);
     font-size: 12px;
@@ -87,6 +103,11 @@ font-family:var(--font-primary);
     overflow: hidden;
 }
 
+
+
+
+
+    
 .live-badge:hover {
     max-width: 250px; /* Expands on hover */
     padding: 8px 25px;
@@ -97,7 +118,18 @@ font-family:var(--font-primary);
     transform: scale(1.05);
 }
 
+
+
+
+
+    
 .live-badge i { animation: pulse 2s infinite; }
+
+
+
+
+
+    
 
 @keyframes pulse {
     0% { opacity: 1; }
@@ -105,11 +137,22 @@ font-family:var(--font-primary);
     100% { opacity: 1; }
 }
 
+
+
+
+
+    
 .container {
 display: grid;
 grid-template-columns: 280px 1fr;
 height: 100vh;
 }
+
+
+
+
+
+    
 
 .sidebar {
 background: var(--bg-darker);
@@ -122,12 +165,21 @@ display: flex;
 flex-direction: column;  
 }
 
+
+
+
+    
 .sidebar-brand {
     text-align: center;
     margin-bottom: 38px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border);
 }
+
+
+
+
+    
 
 .brand-logo {
     width: 90px; /* Adjust size as needed */
@@ -137,12 +189,21 @@ flex-direction: column;
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+
+
+
+    
 .brand-logo:hover {
     /* Uses drop-shadow instead of text-shadow for images */
     filter: drop-shadow(0 0 15px var(--primary)) brightness(1.2) blur(0.2px);
     transform: scale(1.1) translateY(-5px);
 }
 
+
+
+
+
+    
 .sidebar-brand i {
     font-size: 60px;
     color: var(--primary);
@@ -151,6 +212,11 @@ flex-direction: column;
     cursor: pointer;
 }
 
+
+
+
+    
+
 .sidebar-brand i:hover {
     color: var(--primary);
     text-shadow: 0 0 15px var(--bg-card);
@@ -158,6 +224,10 @@ flex-direction: column;
     transform: scale(1.1) translateY(-3px);    
     transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
+
+
+    
 
 .sidebar-brand h2 {
     font-family: var(--font-tech);
@@ -168,6 +238,10 @@ flex-direction: column;
     line-height: 1.4;
 }
 
+
+
+
+    
 .sidebar button {
 width:100%;
 padding:12px;
@@ -182,17 +256,27 @@ transition:var(--transition);
 text-align: left;
 }
 
+
+    
+
 .sidebar button i {
     width: 25px;
     text-align: center;
     margin-right: 5px;
 }
 
+
+
+
+    
 .sidebar button:hover,
 .sidebar button.active-btn {
 background:var(--primary);
 }
 
+
+
+    
 .sidebar-footer {
     margin-top: auto; /* Pushes the footer to the bottom */
     padding-top: 20px;
@@ -200,6 +284,10 @@ background:var(--primary);
     text-align: center;
     border-top: 1px solid var(--border);
 }
+
+
+
+    
 
 .version-tag {
     font-family: var(--font-tech);
@@ -211,29 +299,46 @@ background:var(--primary);
     transition: var(--transition);
 }
 
+
+
+    
 .version-tag:hover {
     color: var(--primary);
     opacity: 1;
     text-shadow: 0 0 10px rgba(255, 80, 17, 0.4);
 }
 
+
+
+    
 .main {
 padding:25px;
 overflow:auto;
     cursor: pointer;
 }
 
+
+
+    
+
 .main section {
     display: none;
     animation: fadeIn 0.4s ease-in-out;
 }
 
+
+
+
+    
 .main section.active { display: block; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+    
 
 .dashboard {
 display:grid;
@@ -242,6 +347,8 @@ gap:20px;
 margin-bottom: 20px;
 }
 
+
+    
 .dashboard-4col {
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
