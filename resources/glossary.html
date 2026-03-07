@@ -37,8 +37,17 @@
         }
 
         /* --- Base & Scrollbar --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        * { 
+			box-sizing: border-box; 
+			margin: 0; 
+			padding: 0; 
+		}
+
+
+		
+        html { 
+			scroll-behavior: smooth; 
+		}
         
         
         
@@ -48,7 +57,7 @@
             background-color: var(--body-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding-top: 2rem; /* Space for fixed nav */
+            padding-top: 1rem; /* Space for fixed nav */
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -94,7 +103,7 @@
         /* --- Responsive Styles --- */
         @media screen and (max-width: 767px) {
             body {
-                padding-top: 2rem;
+                padding-top: 1rem;
             }
           }
           
@@ -120,6 +129,9 @@
             font-size: 1.1rem;
             color: var(--text-color);
         }
+
+
+		
         
 /* --- View Switcher Styles --- */
 .view-switcher {
@@ -128,6 +140,8 @@
     gap: 0.5rem;
     margin-bottom: 1rem;
 }
+
+		
 
 .view-switcher button {
     background-color: var(--box-color);
@@ -139,12 +153,16 @@
     transition: all 0.3s ease;
 }
 
+		
+
 .view-switcher button:hover,
 .view-switcher button.active {
     color: var(--skin-color);
     border-color: var(--skin-color);
     background-color: rgba(255, 80, 17, 0.05);
 }
+
+		
 
 /* --- Grid Layout Logic --- */
 #glossaryContainer.grid-mode {
@@ -153,6 +171,8 @@
     gap: 1.5rem;
 }
 
+
+		
 #glossaryContainer.grid-mode .glossary-item {
     margin-bottom: 0; /* Grid handles spacing */
     height: 100%;
@@ -160,9 +180,13 @@
     flex-direction: column;
 }
 
+
+		
 #glossaryContainer.grid-mode .definition {
     flex-grow: 1;
 }
+
+		
 
 /* Responsive adjustment for small screens */
 @media screen and (max-width: 600px) {
@@ -170,6 +194,8 @@
         grid-template-columns: 1fr;
     }
 }        
+
+		
 
         /* Search bar */
         #searchBar {
@@ -183,11 +209,16 @@
             color: var(--title-color);
             transition: border-color 0.3s, box-shadow 0.3s;
         }
+
+
+		
         #searchBar:focus {
             outline: none;
             border-color: var(--skin-color);
             box-shadow: 0 0 0 3px rgba(255, 80, 17, 0.2);
         }
+
+		
 
         /* Alphabet filter */
         .alphabet-filter {
@@ -198,6 +229,8 @@
             justify-content: center;
             gap: 0.5rem;
         }
+
+		
         .alphabet-filter button {
             background-color: var(--box-color);
             border: 1px solid var(--mirage-color);
@@ -209,6 +242,8 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
+
+		
         .alphabet-filter button:hover, 
         .alphabet-filter button.active {
             background-color: var(--skin-color);
@@ -216,6 +251,7 @@
             transform: translateY(-2px);
             border-color: var(--skin-color);
         }
+		
 
         /* Glossary styling */
         .glossary-item {
@@ -226,16 +262,22 @@
             border: 1px solid var(--mirage-color);
             transition: transform 0.3s, box-shadow 0.3s;
         }
+
+		
         .glossary-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 80, 17, 0.2);
         }
+
+		
         .term {
             font-weight: 700;
             font-size: 1.25rem;
             color: var(--skin-color);
             margin-bottom: 0.5rem;
         }
+
+		
         .definition {
             font-size: 1rem;
             color: var(--text-color);
@@ -249,14 +291,11 @@
         /* ====================================================== */
         @media screen and (max-width: 980px) {
             body { 
-                padding-top: 2rem; 
+                padding-top: 1rem; 
                 padding-left: 0;
                 padding-right: 0;
             }
             
-            
-		
-
 
     </style>
 </head>
