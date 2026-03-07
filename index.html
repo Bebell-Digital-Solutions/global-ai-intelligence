@@ -99,12 +99,20 @@ overflow: auto;
 
 
 .brand-logo {
-    width: 50px; /* Adjust size as needed */
+    width: 150px; /* Adjust size as needed */
     height: auto;
     filter: drop-shadow(0 0 5px rgba(255, 80, 17, 0.3)); /* Optional: adds a glow in your skin-color */
+  cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.brand-logo:hover {
+    /* Uses drop-shadow instead of text-shadow for images */
+    filter: drop-shadow(0 0 15px var(--box-color)) brightness(1.2) blur(0.2px);
+    transform: scale(1.1) translateY(-5px);
+}
 
+  
   
 
 .sidebar-brand i {
