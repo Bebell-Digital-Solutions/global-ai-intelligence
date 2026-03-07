@@ -21,7 +21,6 @@
 :root {
 --primary:#ff5011;
 --secondary:#333333;
---skin-color:#ff5011;  
 --bg-dark:#000000;
 --bg-darker:#050505;
 --bg-card:#121212;
@@ -597,14 +596,14 @@ canvas { margin-top:10px; }
       
         <div class="dashboard">
             <div class="card">
-                <h3><i class="fa-solid fa-chart-column" style="color: var(--primary)></i> Global Hyperscaler CapEx Growth (USD Billions)</h3>
+                <h3><i class="fa-solid fa-chart-column" style="color: var(--primary)"></i> Global Hyperscaler CapEx Growth (USD Billions)</h3>
                 <canvas id="investmentChart"></canvas>
             </div>
 
 
           
             <div class="card">
-                <h3><i class="fa-solid fa-chart-line" style="color: var(--primary)></i> Frontier Lab Valuations (Q1 2026)</h3>
+                <h3><i class="fa-solid fa-chart-line" style="color: var(--primary)"></i> Frontier Lab Valuations (Q1 2026)</h3>
                 <canvas id="valuationChart"></canvas>
             </div>
         </div>
@@ -612,7 +611,7 @@ canvas { margin-top:10px; }
       
         <div class="dashboard">
             <div class="card" style="grid-column: 1 / -1; display: flex; flex-direction: column;">
-                <h3><i class="fa-solid fa-chart-line" style="color: var(--primary)></i> Enterprise Adoption Progression (%)</h3>
+                <h3><i class="fa-solid fa-chart-line" style="color: var(--primary)"></i> Enterprise Adoption Progression (%)</h3>
                 <div style="position: relative; flex-grow: 1; min-height: 250px; margin-top: 15px;">
                     <canvas id="adoptionChart"></canvas>
                 </div>
@@ -765,9 +764,6 @@ canvas { margin-top:10px; }
             </div>
         </div>
 
-
-      
-
 <div class="dashboard">
     <div class="card">
         <h3><i class="fa-solid fa-microchip"></i> Hardware Foundation</h3>
@@ -790,8 +786,7 @@ canvas { margin-top:10px; }
         <p class="muted" style="font-size: 12px; margin-top: 15px;">* Major sites under construction in Abilene (TX), Port Washington (WI), NM, and OH.</p>
     </div>
 </div>
-
-      
+     
     </section>
 
 
@@ -872,6 +867,8 @@ canvas { margin-top:10px; }
                         <h4 style="color: var(--success); margin-top: 0;">Supercharged Progress Scenario</h4>
                         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 0;">Exponential AI breakthroughs combined with high workforce readiness lead to a productivity surge where humans act as "agent orchestrators".</p>
                     </div>
+
+                  
                     <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); padding: 15px; border-radius: 8px;">
                         <h4 style="color: var(--danger); margin-top: 0;">Age of Displacement Scenario</h4>
                         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 0;">AI advancement outpaces the capacity to reskill, leading to unemployment spikes and wage polarization for knowledge workers.</p>
@@ -971,6 +968,12 @@ canvas { margin-top:10px; }
         </div>
     </section>
 
+
+
+
+
+                  
+
     <!-- SOURCES SECTION -->
     <section id="sources">
         <div class="card">
@@ -1014,6 +1017,10 @@ canvas { margin-top:10px; }
 
 </div>
 </div>
+
+
+
+                  
 
 <script>
 function go(id){
