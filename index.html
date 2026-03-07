@@ -300,6 +300,37 @@ color: var(--primary);
 margin-bottom: 20px;
 }
 
+
+
+/* Enhanced spacing for dashboard lists */
+.tech-list {
+    color: var(--text-muted);
+    padding-left: 20px;
+    font-size: 14px;
+    list-style-type: none; /* Optional: hides default bullets for a cleaner tech look */
+}
+
+.tech-list li {
+    margin-bottom: 15px; /* Adjust this value for more or less space */
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Optional: add custom techy bullets using your primary color */
+.tech-list li::before {
+    content: "▹";
+    color: var(--primary);
+    position: absolute;
+    left: -18px;
+}
+
+.tech-list li:last-child {
+    margin-bottom: 0;
+}
+
+
+  
+
 .metric {
 font-size:36px;
 margin-top:10px;
@@ -727,27 +758,33 @@ canvas { margin-top:10px; }
             </div>
         </div>
 
-        <div class="dashboard">
-            <div class="card">
-                <h3><i class="fa-solid fa-microchip"></i> Hardware Foundation</h3>
-                <ul style="color:var(--text-muted); padding-left: 20px; line-height: 1.6; font-size: 14px;">
-                    <li><strong style="color:var(--text-main);">Nvidia Dominance:</strong> Hit $5T Market Cap. Record FY26 Data Center revenue of $193.7B with 75%+ margins.</li>
-                    <li><strong style="color:var(--text-main);">Rubin (R100) Launch:</strong> Uses TSMC 3nm & HBM4. Reduces inference token costs by 10x, optimized for "agentic AI".</li>
-                    <li><strong style="color:var(--text-main);">Custom Silicon:</strong> Google TPU v6 (Trillium), AWS Trainium2 (500k-chip Anthropic cluster), Microsoft Maia 200.</li>
-                    <li><strong style="color:var(--text-main);">Supply Chain:</strong> TSMC N2 mass production underway. Nvidia is TSMC's largest N2 client for 2026.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3><i class="fa-solid fa-tower-broadcast"></i> Project Stargate</h3>
-                <p style="color:var(--text-muted); font-size: 14px; line-height: 1.6;">The most ambitious infrastructure initiative in history. A public-private venture to build world-scale data centers functioning as a US national utility.</p>
-                <div style="margin-top: 15px;">
-                    <div class="flex-between"><span>Total Investment</span> <span class="metric-small" style="color:var(--success); margin:0;">$500B</span></div>
-                    <div class="flex-between"><span>Power Target</span> <span class="metric-small" style="color:var(--warning); margin:0;">10 GW</span></div>
-                    <div class="flex-between"><span>Partners</span> <span style="color:var(--text-main); font-size:14px; text-align:right;">OpenAI, SoftBank,<br>Oracle, MGX</span></div>
-                </div>
-                <p class="muted" style="font-size: 12px; margin-top: 15px;">* Major sites under construction in Abilene (TX), Port Washington (WI), NM, and OH.</p>
-            </div>
+
+      
+
+<div class="dashboard">
+    <div class="card">
+        <h3><i class="fa-solid fa-microchip"></i> Hardware Foundation</h3>
+        <ul class="tech-list">
+            <li><strong style="color:var(--text-main);">Nvidia Dominance:</strong> Hit $5T Market Cap. Record FY26 Data Center revenue of $193.7B with 75%+ margins.</li>
+            <li><strong style="color:var(--text-main);">Rubin (R100) Launch:</strong> Uses TSMC 3nm & HBM4. Reduces inference token costs by 10x, optimized for "agentic AI".</li>
+            <li><strong style="color:var(--text-main);">Custom Silicon:</strong> Google TPU v6 (Trillium), AWS Trainium2 (500k-chip Anthropic cluster), Microsoft Maia 200.</li>
+            <li><strong style="color:var(--text-main);">Supply Chain:</strong> TSMC N2 mass production underway. Nvidia is TSMC's largest N2 client for 2026.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3><i class="fa-solid fa-tower-broadcast"></i> Project Stargate</h3>
+        <p style="color:var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 15px;">The most ambitious infrastructure initiative in history. A public-private venture to build world-scale data centers functioning as a US national utility.</p>
+        <div>
+            <div class="flex-between"><span>Total Investment</span> <span class="metric-small" style="color:var(--success); margin:0;">$500B</span></div>
+            <div class="flex-between"><span>Power Target</span> <span class="metric-small" style="color:var(--warning); margin:0;">10 GW</span></div>
+            <div class="flex-between"><span>Partners</span> <span style="color:var(--text-main); font-size:14px; text-align:right;">OpenAI, SoftBank,<br>Oracle, MGX</span></div>
         </div>
+        <p class="muted" style="font-size: 12px; margin-top: 15px;">* Major sites under construction in Abilene (TX), Port Washington (WI), NM, and OH.</p>
+    </div>
+</div>
+
+      
     </section>
 
 
