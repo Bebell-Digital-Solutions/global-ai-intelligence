@@ -102,14 +102,24 @@ grid-template-columns: 280px 1fr;
 height: 100vh;
 }
 
+
+  
+
 .sidebar {
 background: var(--bg-darker);
 border-right: 1px solid var(--border);
 padding: 20px;
 padding-top: 2rem;
 overflow: auto;
-position: relative; /* Essential for absolute positioning of children */  
+position: relative; /* Essential for absolute positioning of children */
+display: flex;
+flex-direction: column;  
 }
+
+
+
+
+  
 
 .sidebar-brand {
     text-align: center;
