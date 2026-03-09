@@ -366,9 +366,10 @@ transition:var(--transition);
 box-shadow:var(--shadow-glow);
 }
 
+.card:hover { background:var(--bg-hover); }
 
 
-        .card:hover {
+        .card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; height: 2px;
