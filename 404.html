@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>404 - Page Not Found | Retro Terminal</title>
-    <!-- Google Fonts + GSAP + SplitText (CDN) -->
+    <title>404 - Page Not Found | Infinite Loop</title>
+    <!-- Google Fonts + GSAP (Removed the broken SplitText CDN) -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- SplitText utility from GSAP (requires GSAP + extra plugin) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
     <style>
-        /* RESET & GLOBAL */
         * {
             margin: 0;
             padding: 0;
@@ -23,47 +19,42 @@
             height: 100%;
             font-family: 'Roboto Mono', monospace;
             font-size: 16px;
-            user-select: none; /* keep selection disabled for retro feel */
+            user-select: none;
             background-color: #000;
             overflow: hidden;
-            position: relative;
         }
 
         body {
             background-color: #000;
         }
 
-        /* container that holds the text + absolute handle */
         .container {
             width: 100%;
             height: 100%;
             position: relative;
         }
 
-        /* centering wrapper for the 404 message */
         .copy-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            width: auto;
-            white-space: nowrap;   /* keeps the line together, essential for handle animation on single line */
+            white-space: nowrap;
         }
 
-        /* main paragraph style */
         p {
             color: #fff;
             font-size: 24px;
             letter-spacing: 0.2px;
             margin: 0;
-            display: inline-block;  /* ensures width is exactly content width */
+            display: inline-block;
             position: relative;
-            background: #000;       /* solid background behind chars */
+            background-color: #000;
             white-space: pre;
+            line-height: 1.4;
         }
 
-        /* blinking cursor / handle that mimics terminal block */
         .handle {
             background: #fc5800;
             width: 14px;
@@ -73,31 +64,10 @@
             left: 0;
             margin-top: 1px;
             display: block;
-            visibility: visible;
-            opacity: 1;
-            box-shadow: 0 0 2px #fc5800;
+            box-shadow: 0 0 3px #fc5800; /* Added a matching orange glow */
+            border-radius: 1px;
         }
 
-        /* SVG replay button - bottom right */
-        #cb-replay {
-            fill: #666;
-            width: 28px;
-            height: auto;
-            margin: 20px;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            cursor: pointer;
-            z-index: 100;
-            transition: fill 0.2s ease;
-            overflow: inherit;
-        }
-
-        #cb-replay:hover {
-            fill: #fc5800;
-        }
-
-        /* for responsive text: if screen is too narrow, avoid breaking, but we scale font slightly? keep style */
         @media (max-width: 600px) {
             p {
                 font-size: 18px;
@@ -106,391 +76,192 @@
                 width: 10px;
                 height: 24px;
             }
-            #cb-replay {
-                width: 24px;
-                margin: 15px;
-            }
         }
 
-        /* fallback for extra small devices: ensure no line wrap */
         @media (max-width: 420px) {
             .copy-container {
-                white-space: nowrap;
-                transform: translate(-50%, -50%) scale(0.9);
+                transform: translate(-50%, -50%) scale(0.92);
             }
-        }
-
-        /* hide any overflow glitch */
-        body, .container {
-            overflow: hidden;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="copy-container center-xy">
-        <p>404, esta página no se encuentra.</p>
+    <div class="copy-container">
+        <p id="text-target">404, esta página no se encuentra.</p>
         <span class="handle"></span>
     </div>
 </div>
 
-<svg version="1.1" id="cb-replay" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 279.9 297.3" style="enable-background:new 0 0 279.9 297.3;" xml:space="preserve">
-<g>
-	<path d="M269.4,162.6c-2.7,66.5-55.6,120.1-121.8,123.9c-77,4.4-141.3-60-136.8-136.9C14.7,81.7,71,27.8,140,27.8
-		c1.8,0,3.5,0,5.3,0.1c0.3,0,0.5,0.2,0.5,0.5v15c0,1.5,1.6,2.4,2.9,1.7l35.9-20.7c1.3-0.7,1.3-2.6,0-3.3L148.6,0.3
-		c-1.3-0.7-2.9,0.2-2.9,1.7v15c0,0.3-0.2,0.5-0.5,0.5c-1.7-0.1-3.5-0.1-5.2-0.1C63.3,17.3,1,78.9,0,155.4
-		C-1,233.8,63.4,298.3,141.9,297.3c74.6-1,135.1-60.2,138-134.3c0.1-3-2.3-5.4-5.3-5.4l0,0C271.8,157.6,269.5,159.8,269.4,162.6z"/>
-</g>
-</svg>
-
 <script>
-    // Wait for DOM and GSAP plugins ready
     (function() {
-        // Select elements
+        // DOM elements
         const $copyContainer = document.querySelector('.copy-container');
-        const $replayIcon = document.getElementById('cb-replay');
-        const $textParagraph = document.querySelector('.copy-container p');
+        const $textParagraph = document.getElementById('text-target');
         const $handle = document.querySelector('.handle');
-        
-        // Get the exact width of the paragraph (actual text width)
-        // Because the paragraph contains text, we need its full rendered width.
-        let copyWidth = 0;
-        
-        // Helper to compute precise width of the <p> element (including any letter spacing)
-        function getParagraphWidth() {
-            if (!$textParagraph) return 200;
+
+        // Save original text once on load
+        const originalText = $textParagraph.textContent;
+
+        // Animation state
+        let charElements = [];
+        let currentAnimation = null;
+
+        // Helper: Native JS alternative to SplitText
+        function splitTextIntoChars() {
+            $textParagraph.innerHTML = ''; // Clear current content
+            charElements = [];
+            const chars = originalText.split('');
+            
+            chars.forEach(char => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.className = 'char';
+                span.style.opacity = 0;
+                span.style.visibility = 'hidden';
+                $textParagraph.appendChild(span);
+                charElements.push(span);
+            });
+        }
+
+        // Helper: get exact pixel width of paragraph text
+        function getTextWidth() {
+            if (!$textParagraph) return 280;
             const rect = $textParagraph.getBoundingClientRect();
             return rect.width;
         }
-        
-        // Global timeline and SplitText instances
-        let mySplitText = null;
-        let splitTextTimeline = null;
-        let handleTL = null;
-        let mainTL = null;
-        let isAnimating = false;
-        
-        // Function to reset & reinitialize SplitText (since DOM is static but we re-split on restart)
-        function initSplitText() {
-            if (mySplitText) {
-                // revert any previous splitting to clean up DOM nodes
-                mySplitText.revert();
-            }
-            // Create SplitText instance on the paragraph — splitting into characters for per-letter animation
-            mySplitText = new SplitText($textParagraph, { type: "chars,words" });
-            return mySplitText;
-        }
-        
-        // Function that animates the typewriter effect: characters appear staggered
-        function animateCopy() {
-            if (!mySplitText || !mySplitText.chars) return;
-            // kill any ongoing timeline to avoid conflicts
-            if (splitTextTimeline) splitTextTimeline.kill();
-            splitTextTimeline = gsap.timeline();
-            
-            // Initially set all characters to invisible (autoAlpha:0)
-            gsap.set(mySplitText.chars, { autoAlpha: 0 });
-            
-            // Stagger each character to fade in with a slight elastic / back ease
-            splitTextTimeline.to(mySplitText.chars, {
-                duration: 0.08,
-                autoAlpha: 1,
-                ease: "back.out(1.2)",
-                stagger: 0.045,
-                onComplete: function() {
-                    // After all chars visible, trigger handle movement across the whole text width
-                    animateHandleMove();
-                }
-            }, 0);
-        }
-        
-        // Blinking cursor before and after typing (handle blink)
-        function startBlinkHandle() {
-            if (handleTL) handleTL.kill();
-            handleTL = gsap.timeline({ repeat: -1, yoyo: true });
-            handleTL.to('.handle', {
-                duration: 0.45,
-                autoAlpha: 0,
-                ease: "none",
-                repeat: -1,
-                yoyo: true
-            }, 0);
-        }
-        
-        // Stop blinking temporarily when handle moves, but we will restart after move? Better: manage state.
-        let blinkInterval = null;
-        function stopBlinkAndClear() {
-            if (handleTL) {
-                handleTL.kill();
-                handleTL = null;
-            }
-            // ensure handle becomes fully visible before moving
-            gsap.set('.handle', { autoAlpha: 1, clearProps: "all" });
-        }
-        
-        // Animate handle sliding from left edge of paragraph to the right edge (exactly width of text)
-        function animateHandleMove() {
-            // kill any ongoing handle movement timeline
-            if (handleTL && handleTL.isActive()) handleTL.kill();
-            // compute fresh width because font rendering may shift (but typically stable)
-            copyWidth = getParagraphWidth();
-            // we also need the handle initial left position relative to paragraph container.
-            // The .handle is absolutely positioned within .copy-container, but we need to set its 'left' relative to .copy-container? Actually .copy-container is relative container? 
-            // Ensure .copy-container has position relative so that .handle absolute left:0 means start of container.
-            // But we want handle to start at the beginning of the text and travel to end of text.
-            // Since .copy-container text-align center? No, .copy-container has text-align:center but the paragraph is inline-block, so the parent container is centered, but the handle's left relative to .copy-container will be offset.
-            // Simpler approach: we set handle's initial left relative to .copy-container's left edge + paragraph offsetLeft.
-            // Use getBoundingClientRect to find positions.
+
+        // Helper: get handle start left position relative to copy-container
+        function getHandleStartLeft() {
             const containerRect = $copyContainer.getBoundingClientRect();
             const paragraphRect = $textParagraph.getBoundingClientRect();
-            // Starting left position (relative to .copy-container)
-            let startLeft = paragraphRect.left - containerRect.left;
-            let endLeft = startLeft + copyWidth - $handle.offsetWidth; // subtract handle width to align right edge at end of text.
-            // Ensure endLeft >= startLeft
-            endLeft = Math.max(startLeft, endLeft);
+            return paragraphRect.left - containerRect.left;
+        }
+
+        // Helper: get handle end left position
+        function getHandleEndLeft() {
+            const startLeft = getHandleStartLeft();
+            const textWidth = getTextWidth();
+            return startLeft + textWidth; 
+        }
+
+        // Completely reset everything to initial state
+        function fullReset() {
+            if (currentAnimation) {
+                currentAnimation.kill();
+                currentAnimation = null;
+            }
+            gsap.killTweensOf('.handle');
+            gsap.killTweensOf('.char');
             
-            // Kill previous handleTL and set initial properties
-            if (handleTL) handleTL.kill();
-            handleTL = gsap.timeline();
-            // ensure handle is visible and at start position
+            // Re-split text via vanilla JS to ensure a clean DOM
+            splitTextIntoChars();
+            
+            // Reset handle to start position
+            const startLeft = getHandleStartLeft();
             gsap.set('.handle', { 
+                left: startLeft, 
                 autoAlpha: 1,
-                left: startLeft,
-                x: 0
-            });
-            // animate the handle sliding across text, using stepped ease for typewriter "jump" effect (classic terminal feel)
-            // we apply a stepped ease to create blocky movement like a mechanical cursor.
-            handleTL.to('.handle', {
-                duration: 1.0,
-                left: endLeft,
-                ease: "steps(14)",
-                onComplete: function() {
-                    // after sliding, keep cursor at end + blink again
-                    // but we also want continuous blink at end
-                    startPostBlink();
-                }
-            }, 0);
-        }
-        
-        // After handle reaches end, restart blinking (yoyo) at final position
-        function startPostBlink() {
-            if (handleTL) handleTL.kill();
-            handleTL = gsap.timeline({ repeat: -1, yoyo: true });
-            // Keep handle at final left position, then blink opacity
-            handleTL.to('.handle', {
-                duration: 0.5,
-                autoAlpha: 0,
-                ease: "none",
-                repeat: -1,
-                yoyo: true
-            }, 0);
-        }
-        
-        // Full reset and replay animation sequence
-        function replayAnimation() {
-            // kill all ongoing animations
-            if (splitTextTimeline) splitTextTimeline.kill();
-            if (handleTL) handleTL.kill();
-            if (mainTL) mainTL.kill();
-            
-            // revert splittext to original DOM to avoid conflicts
-            if (mySplitText) {
-                mySplitText.revert();
-            }
-            // reinitialize SplitText (fresh)
-            mySplitText = new SplitText($textParagraph, { type: "chars,words" });
-            
-            // reset handle position and visibility: first set hidden? But we need initial blink before typing.
-            gsetInitialHandleState();
-            
-            // Create new main timeline
-            mainTL = gsap.timeline();
-            // step 1: start blinking (cursor) before typing for 0.3 sec then begin character animation
-            // initial blink for 0.5s then trigger animateCopy
-            let preBlink = gsap.timeline();
-            preBlink.to('.handle', { duration: 0.4, autoAlpha: 0, repeat: 1, yoyo: true, ease: "none" });
-            mainTL.add(preBlink, 0);
-            mainTL.call(() => {
-                // after pre-blink, set handle visible and then start typing
-                gsap.set('.handle', { autoAlpha: 1 });
-                animateCopy();   // this will start character fade in and then animate handle movement after chars complete
-            }, null, null, 0.4);
-        }
-        
-        // Helper to set handle initial left position before any move
-        function gsetInitialHandleState() {
-            // compute initial left position based on paragraph offset inside container
-            const containerRect = $copyContainer.getBoundingClientRect();
-            const paragraphRect = $textParagraph.getBoundingClientRect();
-            let startLeft = paragraphRect.left - containerRect.left;
-            startLeft = Math.max(0, startLeft);
-            gsap.set('.handle', {
-                left: startLeft,
-                autoAlpha: 1,
-                clearProps: "x"
+                visibility: "visible"
             });
         }
-        
-        // On window resize, we might need to readjust the handle's position if animation is idle, 
-        // but for simplicity during replay we recompute. Also, if handle is at end after full animation, 
-        // resize could break alignment: re-run final blink with new width? For robust we can re-trigger reposition only after replay.
-        // However to keep it flawless, we add a resize listener that only adjust if no active timeline? 
-        // But easier: whenever replay triggered we compute dynamically. For current idle state after full animation, resize can misplace handle.
-        // So we add resize observer to correct final handle position if animation completed.
-        let animationCompleted = false;
-        function adjustHandleAfterResize() {
-            if (!handleTL || handleTL.isActive() === false && (splitTextTimeline && splitTextTimeline.isActive() === false)) {
-                // if no animation playing, reposition handle at end of text with blink style
-                const containerRect = $copyContainer.getBoundingClientRect();
-                const paragraphRect = $textParagraph.getBoundingClientRect();
-                let startLeft = paragraphRect.left - containerRect.left;
-                let endLeft = startLeft + paragraphRect.width - $handle.offsetWidth;
-                endLeft = Math.max(startLeft, endLeft);
-                // if currently handle is visible and not mid animation, set it to end position
-                if (!gsap.isTweening('.handle')) {
-                    gsap.set('.handle', { left: endLeft });
-                }
+
+        // Step 1: Pre-blink effect (cursor flashes before typing)
+        function preBlink() {
+            const tl = gsap.timeline();
+            tl.to('.handle', { duration: 0.2, autoAlpha: 0, repeat: 2, yoyo: true, ease: "none" });
+            tl.set('.handle', { autoAlpha: 1 });
+            return tl;
+        }
+
+        // Step 2 & 3: Typewriter effect + sync sliding handle across
+        function typeAndSlide() {
+            const tl = gsap.timeline();
+            if (charElements.length === 0) return tl;
+
+            const staggerTime = 0.05;
+            const totalDuration = charElements.length * staggerTime;
+            
+            // Stagger the text in
+            tl.to(charElements, {
+                duration: 0.01,
+                autoAlpha: 1,
+                stagger: staggerTime,
+                ease: "none"
+            }, 0);
+
+            // Move the cursor alongside the text appearing
+            const startLeft = getHandleStartLeft();
+            const endLeft = getHandleEndLeft();
+            
+            tl.fromTo('.handle', 
+                { left: startLeft },
+                {
+                    duration: totalDuration,
+                    left: endLeft,
+                    ease: `steps(${charElements.length})`
+                }, 
+            0);
+
+            return tl;
+        }
+
+        // Step 4: End blink - cursor blinks at the end of text
+        function endBlink() {
+            const tl = gsap.timeline({ repeat: 3, yoyo: true, repeatDelay: 0.1 });
+            tl.to('.handle', { duration: 0.35, autoAlpha: 0, ease: "none" });
+            tl.set('.handle', { autoAlpha: 1 });
+            return tl;
+        }
+
+        // Full animation cycle with proper sequencing
+        function runCycle(onComplete) {
+            fullReset();
+            const master = gsap.timeline({ onComplete: onComplete });
+            
+            master.add(preBlink(), 0);
+            master.add(typeAndSlide(), "+=0.1"); // Text and Cursor move at same time
+            master.add(endBlink(), "+=0.2");
+            master.add(gsap.delayedCall(1.5, () => {}), "+=0.1");
+            
+            return master;
+        }
+
+        // Infinite loop - recursively run cycles
+        function startInfiniteLoop() {
+            if (currentAnimation) {
+                currentAnimation.kill();
             }
+            currentAnimation = runCycle(() => {
+                setTimeout(() => {
+                    startInfiniteLoop();
+                }, 50);
+            });
         }
-        
-        // Initialize page load: first run of the whole sequence
-        function initPage() {
-            // set initial copyWidth calculation for handle start position
-            copyWidth = getParagraphWidth();
-            initSplitText();
-            gsetInitialHandleState();
-            // start blinking then animate copy
-            let initialTimeline = gsap.timeline();
-            // blink twice then start animation
-            initialTimeline.to('.handle', { duration: 0.3, autoAlpha: 0, repeat: 2, yoyo: true, ease: "none" });
-            initialTimeline.call(() => {
-                gsap.set('.handle', { autoAlpha: 1 });
-                animateCopy();   // triggers character reveal + after completion handle movement
-            }, null, null, 0.6);
-        }
-        
-        // override animateCopy so that after char animation we call animateHandleMove (which already does)
-        // We need to ensure that mySplitText animation does not conflict with blinking.
-        // Because in original provided code, they had handle movement after char animation.
-        // We'll replace original functions definitions to ensure flow.
-        // However we already defined animateCopy with onComplete call to animateHandleMove.
-        // And startPostBlink after handle reaches end.
-        // Edge: the global splitTextTimeline may restart manually from replay.
-        
-        // Replay click event: fully reset and replay entire sequence
-        $replayIcon.addEventListener('click', function(e) {
-            e.preventDefault();
-            replayAnimation();
+
+        // Handle window resize - restart animation to maintain correct positioning
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                startInfiniteLoop();
+            }, 150);
         });
-        
-        // Handle resize to keep UI consistent (avoid misplacement of handle)
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                // if not in active animation, reposition handle correctly
-                if (!gsap.isTweening('.handle') && (!splitTextTimeline || !splitTextTimeline.isActive())) {
-                    const containerRect = $copyContainer.getBoundingClientRect();
-                    const paragraphRect = $textParagraph.getBoundingClientRect();
-                    let startLeft = paragraphRect.left - containerRect.left;
-                    let endLeft = startLeft + paragraphRect.width - $handle.offsetWidth;
-                    endLeft = Math.max(startLeft, endLeft);
-                    // if the animation is completed (handle blinking at end) we set handle left to end position
-                    if (handleTL && handleTL.repeat() === -1 && handleTL.yoyo()) {
-                        gsap.set('.handle', { left: endLeft });
-                    } else {
-                        // else if idle but not blinking we set to start position?
-                        if (!handleTL || !handleTL.isActive()) {
-                            gsap.set('.handle', { left: startLeft });
-                        }
-                    }
-                }
-                // recompute width variable for later animations
-                copyWidth = getParagraphWidth();
+
+        // Start the animation when page is fully loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                startInfiniteLoop();
             }, 100);
         });
         
-        // Trigger initial load after fonts ready
-        window.onload = function() {
-            // small delay for font rendering
+        // Fallback in case load event already fired
+        if (document.readyState === 'complete') {
             setTimeout(() => {
-                initPage();
-            }, 50);
-        };
-        
-        // Also ensure that if any errors occur with SplitText, fallback visible
-        // handle case where SplitText constructor might need window load fully
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                // safe
-            });
+                startInfiniteLoop();
+            }, 100);
         }
-        
-        // To match original design philosophy: add slight improved logic: 
-        // we also prevent duplicate timeline conflicts.
-        // Override animateCopy: add onComplete that triggers animateHandleMove and stops previous blinking.
-        window.animateCopy = animateCopy;
-        window.animateHandleMove = animateHandleMove;
-        
-        // fix potential scope: re-export functions if needed
-        // Additionally, ensure that handle movement uses stepped ease for mechanical typewriter feel (original request had SteppedEase.config(12) concept)
-        // Updated animateHandleMove already uses steps(14) to give that retro feel.
-        
-        // patch for cleanup: after splitTextTimeline stagger complete, call animateHandleMove
-        // already added inside splitTextTimeline's onComplete.
-        // But original code also had a separate blinkHandle function, we merged.
-        // Perfect.
-        
-        // For completeness, we also add an edge fix: when replay is clicked we fully revert splitText and reinit.
-        // make sure we reset handle position.
-        function replayAnimation() {
-            if (splitTextTimeline) splitTextTimeline.kill();
-            if (handleTL) handleTL.kill();
-            if (mySplitText) {
-                mySplitText.revert();
-            }
-            // reset paragraph visibility
-            gsap.set($textParagraph, { autoAlpha: 1 });
-            mySplitText = new SplitText($textParagraph, { type: "chars,words" });
-            // hide all chars initially
-            gsap.set(mySplitText.chars, { autoAlpha: 0 });
-            // reset handle to start position
-            const containerRect = $copyContainer.getBoundingClientRect();
-            const paragraphRect = $textParagraph.getBoundingClientRect();
-            let startLeft = paragraphRect.left - containerRect.left;
-            startLeft = Math.max(0, startLeft);
-            gsap.set('.handle', { left: startLeft, autoAlpha: 1 });
-            // start pre-blink sequence then animate chars
-            let replayTL = gsap.timeline();
-            replayTL.to('.handle', { duration: 0.3, autoAlpha: 0, repeat: 2, yoyo: true, ease: "none" });
-            replayTL.call(() => {
-                gsap.set('.handle', { autoAlpha: 1 });
-                // new timeline for characters
-                if (splitTextTimeline) splitTextTimeline.kill();
-                splitTextTimeline = gsap.timeline();
-                splitTextTimeline.to(mySplitText.chars, {
-                    duration: 0.07,
-                    autoAlpha: 1,
-                    ease: "back.out(1)",
-                    stagger: 0.04,
-                    onComplete: () => {
-                        animateHandleMove();
-                    }
-                });
-            }, null, null, 0.45);
-        }
-        
-        // expose replay so button calls new method
-        document.getElementById('cb-replay').onclick = (e) => {
-            e.stopPropagation();
-            replayAnimation();
-        };
-        
-        // additional fix: ensure handle's background bright and no conflict with multiple timelines
-        // Also fix default white-space on container to keep single line
-        // force .copy-container to have white-space: nowrap in style already set, good.
     })();
 </script>
 </body>
